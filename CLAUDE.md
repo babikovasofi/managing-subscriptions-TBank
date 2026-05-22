@@ -336,8 +336,8 @@ README с описанием проекта, ссылкой на демо, ск�
 - [x] Инициализировать git
 
 ### Этап 1. Справочники
-- [ ] `data/references/subscriptions.json` (≥30 сервисов)
-- [ ] `data/references/regular_merchants.json` (≥30 мерчантов)
+- [~] `data/references/subscriptions.json` (≥30 сервисов)
+- [~] `data/references/regular_merchants.json` (≥30 мерчантов)
 
 ### Этап 2. Генератор датасета
 - [ ] Конфиг генератора (seed, число клиентов, период, simulation_today)
