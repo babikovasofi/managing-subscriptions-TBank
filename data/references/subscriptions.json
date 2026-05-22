@@ -161,10 +161,10 @@
   },
   {
     "name": "Яндекс.Плюс",
-    "category": "food_delivery",
+    "category": "streaming_video",
     "base_price_rub": 399,
     "period_days": 30,
-    "mcc_code": "5812",
+    "mcc_code": "4899",
     "popularity": 0.80
   },
   {
