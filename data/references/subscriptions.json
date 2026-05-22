@@ -1,0 +1,266 @@
+[
+  {
+    "name": "Кинопоиск HD",
+    "category": "streaming_video",
+    "base_price_rub": 399,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.85
+  },
+  {
+    "name": "ivi",
+    "category": "streaming_video",
+    "base_price_rub": 499,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.55
+  },
+  {
+    "name": "Okko",
+    "category": "streaming_video",
+    "base_price_rub": 399,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.45
+  },
+  {
+    "name": "START",
+    "category": "streaming_video",
+    "base_price_rub": 299,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.30
+  },
+  {
+    "name": "Wink",
+    "category": "streaming_video",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.20
+  },
+  {
+    "name": "Яндекс.Музыка",
+    "category": "streaming_music",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.60
+  },
+  {
+    "name": "VK Музыка",
+    "category": "streaming_music",
+    "base_price_rub": 169,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.45
+  },
+  {
+    "name": "Звук",
+    "category": "streaming_music",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "4899",
+    "popularity": 0.25
+  },
+  {
+    "name": "iCloud",
+    "category": "cloud_storage",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "4816",
+    "popularity": 0.75
+  },
+  {
+    "name": "Яндекс 360",
+    "category": "cloud_storage",
+    "base_price_rub": 99,
+    "period_days": 30,
+    "mcc_code": "4816",
+    "popularity": 0.55
+  },
+  {
+    "name": "Облако Mail.ru",
+    "category": "cloud_storage",
+    "base_price_rub": 149,
+    "period_days": 30,
+    "mcc_code": "4816",
+    "popularity": 0.25
+  },
+  {
+    "name": "Google One",
+    "category": "cloud_storage",
+    "base_price_rub": 139,
+    "period_days": 30,
+    "mcc_code": "4816",
+    "popularity": 0.15
+  },
+  {
+    "name": "Duolingo Plus",
+    "category": "education",
+    "base_price_rub": 999,
+    "period_days": 30,
+    "mcc_code": "8299",
+    "popularity": 0.35
+  },
+  {
+    "name": "Stepik Pro",
+    "category": "education",
+    "base_price_rub": 799,
+    "period_days": 30,
+    "mcc_code": "8299",
+    "popularity": 0.15
+  },
+  {
+    "name": "Skillbox",
+    "category": "education",
+    "base_price_rub": 4990,
+    "period_days": 30,
+    "mcc_code": "8299",
+    "popularity": 0.10
+  },
+  {
+    "name": "Skyeng",
+    "category": "education",
+    "base_price_rub": 2990,
+    "period_days": 30,
+    "mcc_code": "8299",
+    "popularity": 0.15
+  },
+  {
+    "name": "GeekBrains",
+    "category": "education",
+    "base_price_rub": 2990,
+    "period_days": 30,
+    "mcc_code": "8299",
+    "popularity": 0.10
+  },
+  {
+    "name": "PS Plus Essential",
+    "category": "gaming",
+    "base_price_rub": 599,
+    "period_days": 30,
+    "mcc_code": "5816",
+    "popularity": 0.35
+  },
+  {
+    "name": "Xbox Game Pass Ultimate",
+    "category": "gaming",
+    "base_price_rub": 749,
+    "period_days": 30,
+    "mcc_code": "5816",
+    "popularity": 0.25
+  },
+  {
+    "name": "VK Play Cloud",
+    "category": "gaming",
+    "base_price_rub": 399,
+    "period_days": 30,
+    "mcc_code": "5816",
+    "popularity": 0.20
+  },
+  {
+    "name": "Яндекс.Плюс",
+    "category": "food_delivery",
+    "base_price_rub": 399,
+    "period_days": 30,
+    "mcc_code": "5812",
+    "popularity": 0.80
+  },
+  {
+    "name": "СберПрайм",
+    "category": "food_delivery",
+    "base_price_rub": 299,
+    "period_days": 30,
+    "mcc_code": "5812",
+    "popularity": 0.35
+  },
+  {
+    "name": "Самокат Подписка",
+    "category": "food_delivery",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "5812",
+    "popularity": 0.20
+  },
+  {
+    "name": "Telegram Premium",
+    "category": "productivity",
+    "base_price_rub": 299,
+    "period_days": 30,
+    "mcc_code": "7372",
+    "popularity": 0.55
+  },
+  {
+    "name": "ChatGPT Plus",
+    "category": "productivity",
+    "base_price_rub": 2500,
+    "period_days": 30,
+    "mcc_code": "7372",
+    "popularity": 0.30
+  },
+  {
+    "name": "GitHub Copilot",
+    "category": "productivity",
+    "base_price_rub": 1000,
+    "period_days": 30,
+    "mcc_code": "7372",
+    "popularity": 0.20
+  },
+  {
+    "name": "Notion",
+    "category": "productivity",
+    "base_price_rub": 1000,
+    "period_days": 30,
+    "mcc_code": "7372",
+    "popularity": 0.15
+  },
+  {
+    "name": "Литрес Букмейт",
+    "category": "reading",
+    "base_price_rub": 399,
+    "period_days": 30,
+    "mcc_code": "5942",
+    "popularity": 0.30
+  },
+  {
+    "name": "Bookmate",
+    "category": "reading",
+    "base_price_rub": 299,
+    "period_days": 30,
+    "mcc_code": "5942",
+    "popularity": 0.20
+  },
+  {
+    "name": "MyBook",
+    "category": "reading",
+    "base_price_rub": 249,
+    "period_days": 30,
+    "mcc_code": "5942",
+    "popularity": 0.20
+  },
+  {
+    "name": "Boosty",
+    "category": "other",
+    "base_price_rub": 300,
+    "period_days": 30,
+    "mcc_code": "7299",
+    "popularity": 0.10
+  },
+  {
+    "name": "Kaspersky Plus",
+    "category": "other",
+    "base_price_rub": 299,
+    "period_days": 30,
+    "mcc_code": "5734",
+    "popularity": 0.15
+  },
+  {
+    "name": "Dr.Web Security Space",
+    "category": "other",
+    "base_price_rub": 249,
+    "period_days": 30,
+    "mcc_code": "5734",
+    "popularity": 0.10
+  }
+]

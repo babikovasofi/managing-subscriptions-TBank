@@ -1,0 +1,289 @@
+[
+  {
+    "name": "Пятёрочка",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [200, 3000],
+    "frequency_per_month": 12
+  },
+  {
+    "name": "Магнит",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [200, 2500],
+    "frequency_per_month": 10
+  },
+  {
+    "name": "Перекрёсток",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [400, 4000],
+    "frequency_per_month": 6
+  },
+  {
+    "name": "ВкусВилл",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [500, 3000],
+    "frequency_per_month": 5
+  },
+  {
+    "name": "Лента",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [600, 5000],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Ашан",
+    "category": "groceries",
+    "mcc_code": "5411",
+    "typical_amount_range": [800, 6000],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "Яндекс Go",
+    "category": "transport",
+    "mcc_code": "4121",
+    "typical_amount_range": [150, 800],
+    "frequency_per_month": 15
+  },
+  {
+    "name": "Ситимобил",
+    "category": "transport",
+    "mcc_code": "4121",
+    "typical_amount_range": [200, 1000],
+    "frequency_per_month": 8
+  },
+  {
+    "name": "Метро Москвы",
+    "category": "transport",
+    "mcc_code": "4111",
+    "typical_amount_range": [50, 500],
+    "frequency_per_month": 20
+  },
+  {
+    "name": "Аэроэкспресс",
+    "category": "transport",
+    "mcc_code": "4111",
+    "typical_amount_range": [500, 600],
+    "frequency_per_month": 0.5
+  },
+  {
+    "name": "Яндекс Еда",
+    "category": "food_delivery_oneoff",
+    "mcc_code": "5812",
+    "typical_amount_range": [400, 2500],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Delivery Club",
+    "category": "food_delivery_oneoff",
+    "mcc_code": "5812",
+    "typical_amount_range": [350, 2000],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Самокат",
+    "category": "food_delivery_oneoff",
+    "mcc_code": "5812",
+    "typical_amount_range": [300, 1500],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Аптека 36.6",
+    "category": "pharmacy",
+    "mcc_code": "5912",
+    "typical_amount_range": [200, 2000],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "Ригла",
+    "category": "pharmacy",
+    "mcc_code": "5912",
+    "typical_amount_range": [200, 2500],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "Горздрав",
+    "category": "pharmacy",
+    "mcc_code": "5912",
+    "typical_amount_range": [150, 1500],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Спортмастер",
+    "category": "clothing",
+    "mcc_code": "5941",
+    "typical_amount_range": [800, 8000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Lamoda",
+    "category": "clothing",
+    "mcc_code": "5699",
+    "typical_amount_range": [1000, 8000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Gloria Jeans",
+    "category": "clothing",
+    "mcc_code": "5691",
+    "typical_amount_range": [600, 5000],
+    "frequency_per_month": 0.5
+  },
+  {
+    "name": "Befree",
+    "category": "clothing",
+    "mcc_code": "5691",
+    "typical_amount_range": [700, 5000],
+    "frequency_per_month": 0.5
+  },
+  {
+    "name": "Лукойл",
+    "category": "fuel",
+    "mcc_code": "5541",
+    "typical_amount_range": [1500, 4000],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Роснефть",
+    "category": "fuel",
+    "mcc_code": "5541",
+    "typical_amount_range": [1500, 4000],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Газпромнефть",
+    "category": "fuel",
+    "mcc_code": "5541",
+    "typical_amount_range": [1500, 4000],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Татнефть",
+    "category": "fuel",
+    "mcc_code": "5541",
+    "typical_amount_range": [1500, 3500],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "Шоколадница",
+    "category": "cafe",
+    "mcc_code": "5812",
+    "typical_amount_range": [400, 1500],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Додо Пицца",
+    "category": "cafe",
+    "mcc_code": "5814",
+    "typical_amount_range": [500, 1800],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Ростикс",
+    "category": "cafe",
+    "mcc_code": "5814",
+    "typical_amount_range": [300, 800],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Бургер Кинг",
+    "category": "cafe",
+    "mcc_code": "5814",
+    "typical_amount_range": [250, 700],
+    "frequency_per_month": 4
+  },
+  {
+    "name": "Старбакс",
+    "category": "cafe",
+    "mcc_code": "5812",
+    "typical_amount_range": [300, 600],
+    "frequency_per_month": 5
+  },
+  {
+    "name": "Wildberries",
+    "category": "marketplace",
+    "mcc_code": "5999",
+    "typical_amount_range": [500, 10000],
+    "frequency_per_month": 6
+  },
+  {
+    "name": "Ozon",
+    "category": "marketplace",
+    "mcc_code": "5999",
+    "typical_amount_range": [400, 8000],
+    "frequency_per_month": 5
+  },
+  {
+    "name": "Яндекс.Маркет",
+    "category": "marketplace",
+    "mcc_code": "5999",
+    "typical_amount_range": [300, 7000],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "AliExpress",
+    "category": "marketplace",
+    "mcc_code": "5999",
+    "typical_amount_range": [200, 3000],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "ЖКХ",
+    "category": "utilities",
+    "mcc_code": "4900",
+    "typical_amount_range": [3000, 8000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "МТС",
+    "category": "utilities",
+    "mcc_code": "4813",
+    "typical_amount_range": [300, 600],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Ростелеком",
+    "category": "utilities",
+    "mcc_code": "4813",
+    "typical_amount_range": [400, 800],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "World Class",
+    "category": "fitness",
+    "mcc_code": "7997",
+    "typical_amount_range": [3500, 6000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Х-Fit",
+    "category": "fitness",
+    "mcc_code": "7997",
+    "typical_amount_range": [2500, 4500],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Банкомат",
+    "category": "atm",
+    "mcc_code": "6011",
+    "typical_amount_range": [1000, 10000],
+    "frequency_per_month": 3
+  },
+  {
+    "name": "Синема Парк",
+    "category": "entertainment",
+    "mcc_code": "7832",
+    "typical_amount_range": [300, 600],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "IMAX",
+    "category": "entertainment",
+    "mcc_code": "7832",
+    "typical_amount_range": [500, 900],
+    "frequency_per_month": 0.5
+  }
+]
