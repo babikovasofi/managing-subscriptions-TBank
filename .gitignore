@@ -1,0 +1,53 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.so
+
+# uv
+.uv/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite3
+
+# Generated data (gitignored — regenerate locally)
+data/output/*.csv
+data/output/*.json
+data/output/meta.json
+!data/output/.gitkeep
+
+# Saved ML models (large binary files)
+ml/models/saved/*.pkl
+ml/models/saved/*.joblib
+!ml/models/saved/.gitkeep
+
+# Next.js
+node_modules/
+.next/
+out/
+.turbo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo

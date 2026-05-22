@@ -1,0 +1,17 @@
+[project]
+name = "managing-subscriptions-tbank"
+version = "0.1.0"
+description = "Subscription management service — T-Bank hackathon"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "faker>=24.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
