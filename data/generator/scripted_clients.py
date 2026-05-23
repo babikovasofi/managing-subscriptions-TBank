@@ -304,12 +304,13 @@ def scenario_newbie(
     rng: np.random.Generator,
 ) -> ScriptedClientResult:
     """
-    Яндекс.Плюс — единственная подписка, стартовала 60 дней назад.
-    Простейший кейс: 2 списания, никаких аномалий.
+    Яндекс.Плюс — единственная подписка, стартовала 80 дней назад.
+    Простейший кейс: 3 списания, никаких аномалий.
+    (80 дней гарантируют ≥3 платежей независимо от джиттера генератора.)
     """
     persona = PERSONA_BY_NAME["Студент"]
     merchant = _get_sub(subs_ref, "Яндекс.Плюс")
-    start = SIMULATION_TODAY - timedelta(days=60)
+    start = SIMULATION_TODAY - timedelta(days=80)
     plan = _make_plan(
         client_id=client_id,
         merchant=merchant,
