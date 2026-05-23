@@ -13,7 +13,7 @@ import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { formatRub } from "@/lib/utils";
 
 const CAT_COLORS: Record<SubscriptionCategory, string> = {
-  streaming_video: "var(--tb-accent)",
+  streaming_video: "#FFDD2D",
   streaming_music: "#A855F7",
   cloud_storage:   "#3B82F6",
   education:       "#10B981",

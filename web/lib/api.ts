@@ -3,7 +3,6 @@ import type {
   ActionResponse,
   ActionType,
   AnalyticsResponse,
-  ClientsResponse,
   ManualSubscriptionRequest,
   NotificationsResponse,
   SubscriptionResponse,
@@ -20,10 +19,6 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
     throw new Error((body as { error?: string }).error ?? `HTTP ${res.status}`);
   }
   return res.json() as Promise<T>;
-}
-
-export function getClients(): Promise<ClientsResponse> {
-  return fetchJson<ClientsResponse>("/clients");
 }
 
 export function getSubscriptions(clientId: string): Promise<SubscriptionsResponse> {

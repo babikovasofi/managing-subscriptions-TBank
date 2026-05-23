@@ -34,18 +34,6 @@ export type ActionType =
   | "hide"
   | "unhide";
 
-// ── Clients ────────────────────────────────────────────────────────────────
-
-export interface ClientItem {
-  id: string;
-  label: string;
-}
-
-export interface ClientsResponse {
-  simulation_today: string;
-  clients: ClientItem[];
-}
-
 // ── Subscriptions ──────────────────────────────────────────────────────────
 
 export interface PriceHistoryEntry {
