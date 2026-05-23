@@ -128,12 +128,12 @@
     "popularity": 0.25
   },
   {
-    "name": "Яндекс.Игры",
+    "name": "Loudplay",
     "category": "gaming",
-    "base_price_rub": 199,
+    "base_price_rub": 690,
     "period_days": 30,
     "mcc_code": "5816",
-    "popularity": 0.15
+    "popularity": 0.25
   },
   {
     "name": "VK Play Cloud",
