@@ -382,12 +382,12 @@ README с описанием проекта, ссылкой на демо, ск�
 - [x] Эндпоинты: clients, subscriptions, analytics, notifications, actions, manual
 
 ### Этап 10. Фронт каркас
-- [ ] Next.js init
-- [ ] Tailwind, глобальные стили в стиле Т-банка
+- [~] Next.js init
+- [~] Tailwind, глобальные стили в стиле Т-банка
 - [ ] Мобильный layout
 
 ### Этап 11. Переключатель клиентов
-- [ ] UI селектор
+- [~] UI селектор
 - [ ] LocalStorage
 
 ### Этап 12. Экран подписок
