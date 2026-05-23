@@ -64,12 +64,12 @@
     "popularity": 0.25
   },
   {
-    "name": "iCloud",
+    "name": "МегаФон Облако",
     "category": "cloud_storage",
-    "base_price_rub": 199,
+    "base_price_rub": 99,
     "period_days": 30,
     "mcc_code": "4816",
-    "popularity": 0.75
+    "popularity": 0.20
   },
   {
     "name": "Яндекс 360",
@@ -86,22 +86,6 @@
     "period_days": 30,
     "mcc_code": "4816",
     "popularity": 0.25
-  },
-  {
-    "name": "Google One",
-    "category": "cloud_storage",
-    "base_price_rub": 139,
-    "period_days": 30,
-    "mcc_code": "4816",
-    "popularity": 0.15
-  },
-  {
-    "name": "Duolingo Plus",
-    "category": "education",
-    "base_price_rub": 999,
-    "period_days": 30,
-    "mcc_code": "8299",
-    "popularity": 0.35
   },
   {
     "name": "Stepik Pro",
@@ -136,20 +120,20 @@
     "popularity": 0.10
   },
   {
-    "name": "PS Plus Essential",
+    "name": "GFN.RU",
     "category": "gaming",
-    "base_price_rub": 599,
-    "period_days": 30,
-    "mcc_code": "5816",
-    "popularity": 0.35
-  },
-  {
-    "name": "Xbox Game Pass Ultimate",
-    "category": "gaming",
-    "base_price_rub": 749,
+    "base_price_rub": 449,
     "period_days": 30,
     "mcc_code": "5816",
     "popularity": 0.25
+  },
+  {
+    "name": "Яндекс.Игры",
+    "category": "gaming",
+    "base_price_rub": 199,
+    "period_days": 30,
+    "mcc_code": "5816",
+    "popularity": 0.15
   },
   {
     "name": "VK Play Cloud",
@@ -192,28 +176,20 @@
     "popularity": 0.55
   },
   {
-    "name": "ChatGPT Plus",
+    "name": "VK Combo",
     "category": "productivity",
-    "base_price_rub": 2500,
+    "base_price_rub": 169,
     "period_days": 30,
     "mcc_code": "7372",
     "popularity": 0.30
   },
   {
-    "name": "GitHub Copilot",
+    "name": "Битрикс24 Базовый",
     "category": "productivity",
-    "base_price_rub": 1000,
+    "base_price_rub": 1190,
     "period_days": 30,
     "mcc_code": "7372",
-    "popularity": 0.20
-  },
-  {
-    "name": "Notion",
-    "category": "productivity",
-    "base_price_rub": 1000,
-    "period_days": 30,
-    "mcc_code": "7372",
-    "popularity": 0.15
+    "popularity": 0.10
   },
   {
     "name": "Литрес Букмейт",
@@ -224,12 +200,12 @@
     "popularity": 0.30
   },
   {
-    "name": "Bookmate",
+    "name": "МТС Строки",
     "category": "reading",
-    "base_price_rub": 299,
+    "base_price_rub": 279,
     "period_days": 30,
     "mcc_code": "5942",
-    "popularity": 0.20
+    "popularity": 0.15
   },
   {
     "name": "MyBook",

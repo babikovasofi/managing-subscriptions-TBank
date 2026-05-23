@@ -263,15 +263,15 @@ def scenario_heavy_user(
     8 активных подписок суммарно ~10 635₽/мес. Стресс для аналитики и UI.
     """
     persona = PERSONA_BY_NAME["Активный пользователь подписок"]
-    # Итого: 4990 + 2500 + 1000 + 749 + 399 + 399 + 199 + 399 = 10 635₽
+    # Итого: 4990 + 169 + 1190 + 449 + 399 + 399 + 99 + 399 = 8 094₽
     services = [
         ("Skillbox",                  0),
-        ("ChatGPT Plus",             10),
-        ("GitHub Copilot",           20),
-        ("Xbox Game Pass Ultimate",  30),
+        ("VK Combo",                 10),
+        ("Битрикс24 Базовый",        20),
+        ("GFN.RU",                   30),
         ("Кинопоиск HD",             40),
         ("Яндекс.Плюс",              50),
-        ("iCloud",                   60),
+        ("МегаФон Облако",           60),
         ("Литрес Букмейт",           70),
     ]
     plans = []
@@ -341,7 +341,7 @@ def scenario_overlapping_dates(
     """
     persona = PERSONA_BY_NAME["Активный пользователь подписок"]
     common_start = SIMULATION_TODAY - timedelta(days=240)
-    services = ["Кинопоиск HD", "Яндекс.Музыка", "Telegram Premium", "iCloud"]
+    services = ["Кинопоиск HD", "Яндекс.Музыка", "Telegram Premium", "МегаФон Облако"]
     plans = []
     for name in services:
         merchant = _get_sub(subs_ref, name)
@@ -626,7 +626,7 @@ def scenario_hard_negative_mortgager_1(
     """
     Тинькофф Ипотека (jitter=0, банковский автоплатёж) + Паркинг Центр
     + АльфаСтрахование. Ипотека — максимально стабильный интервал, cv_interval≈0.
-    Реальная подписка iCloud.
+    Реальная подписка МегаФон Облако.
     """
     persona = PERSONA_BY_NAME["Семейный"]
     ipoteka_txns, ipoteka_lbl = _generate_hard_neg_txns(
@@ -638,11 +638,11 @@ def scenario_hard_negative_mortgager_1(
     insurance_txns, insurance_lbl = _generate_hard_neg_txns(
         client_id, _get_merchant(reg_ref, "АльфаСтрахование"), 2_200.0, 30, 11, rng, 1
     )
-    icloud = _get_sub(subs_ref, "iCloud")
+    megafon = _get_sub(subs_ref, "МегаФон Облако")
     sub_start = SIMULATION_TODAY - timedelta(days=250)
     sub_plan = _make_plan(
-        client_id, icloud, sub_start, None,
-        [(sub_start, float(icloud["base_price_rub"]))], scenario_tag="regular",
+        client_id, megafon, sub_start, None,
+        [(sub_start, float(megafon["base_price_rub"]))], scenario_tag="regular",
     )
     return ScriptedClientResult(
         client_id=client_id,
@@ -665,7 +665,7 @@ def scenario_hard_negative_mortgager_2(
 ) -> ScriptedClientResult:
     """
     Тинькофф Ипотека + Дом.ру (MCC 4816 — подписочный!) + АльфаСтрахование.
-    Дом.ру — самый сложный: MCC совпадает с подписками (iCloud, Яндекс 360).
+    Дом.ру — самый сложный: MCC совпадает с подписками (МегаФон Облако, Яндекс 360).
     Реальная подписка Кинопоиск HD.
     """
     persona = PERSONA_BY_NAME["IT-специалист"]
