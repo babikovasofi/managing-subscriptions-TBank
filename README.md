@@ -6,7 +6,7 @@ MVP мобильного сервиса, который автоматическ
 
 ## Демо
 
-**[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-f97f.up.railway.app)**
+**[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-802c.up.railway.app)**
 
 API: [https://managing-subscriptions-tbank-production.up.railway.app](https://managing-subscriptions-tbank-production.up.railway.app)
 
@@ -83,4 +83,4 @@ npm run dev
 ## Как запустить задеплоенный сайт
 
 Открой в браузере (оптимизировано под мобильный):
-**[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-f97f.up.railway.app)**
+**[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-802c.up.railway.app)**
