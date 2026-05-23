@@ -265,13 +265,13 @@ def scenario_heavy_user(
     persona = PERSONA_BY_NAME["Активный пользователь подписок"]
     # Итого: 4990 + 169 + 1190 + 449 + 399 + 399 + 99 + 399 = 8 094₽
     services = [
-        ("Skillbox",                  0),
-        ("VK Combo",                 10),
-        ("Битрикс24 Базовый",        20),
+        ("Skillbox",                  3),   # next_payment ≈ day 3
+        ("VK Combo",                  4),   # next_payment ≈ day 4
+        ("Битрикс24 Базовый",         5),   # next_payment ≈ day 5
         ("GFN.RU",                   30),
         ("Кинопоиск HD",             40),
         ("Яндекс.Плюс",              50),
-        ("МегаФон Облако",           60),
+        ("МегаФон Облако",           60),   # next_payment ≈ day 0
         ("Литрес Букмейт",           70),
     ]
     plans = []

@@ -103,16 +103,23 @@ def compute_analytics(client_id: str, subscriptions: list[Subscription]) -> Clie
 
     notifications: list[Notification] = []
 
-    # Upcoming payments (1–3 days); skip trial_ending — they get their own message
+    # Upcoming payments (0–7 days); skip trial_ending — they get their own message
     for s in sorted(subs, key=lambda x: x.next_payment_date):
         if s.status == "trial_ending":
             continue
         days = (s.next_payment_date - today).days
-        if 1 <= days <= 3:
-            day_word = "день" if days == 1 else "дня"
+        if 0 <= days <= 7:
+            if days == 0:
+                text = f"Сегодня спишется {s.amount:.0f} ₽ за «{s.merchant_name}»."
+            elif days == 1:
+                text = f"Завтра спишется {s.amount:.0f} ₽ за «{s.merchant_name}»."
+            elif days <= 4:
+                text = f"Через {days} дня спишется {s.amount:.0f} ₽ за «{s.merchant_name}»."
+            else:
+                text = f"Через {days} дней спишется {s.amount:.0f} ₽ за «{s.merchant_name}»."
             notifications.append(Notification(
                 date=today,
-                text=f"Через {days} {day_word} спишется {s.amount:.0f} ₽ за «{s.merchant_name}».",
+                text=text,
                 type="upcoming_payment",
                 merchant_name=s.merchant_name,
             ))
