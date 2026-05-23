@@ -12,7 +12,6 @@ const GROUP_ORDER = ["Сегодня", "Вчера", "Ранее"] as const;
 const NOTIF_COLORS: Record<NotificationType, { bg: string; color: string }> = {
   upcoming_payment: { bg: "#FFDD2D", color: "#333333" },
   price_increased:  { bg: "#EF8007", color: "#ffffff" },
-  possibly_unused:  { bg: "#6366F1", color: "#ffffff" },
   trial_ending:     { bg: "#F59E0B", color: "#ffffff" },
   summary:          { bg: "#3B82F6", color: "#ffffff" },
 };
