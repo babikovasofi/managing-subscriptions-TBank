@@ -23,7 +23,6 @@ export type NotificationType =
   | "upcoming_payment"
   | "trial_ending"
   | "price_increased"
-  | "possibly_unused"
   | "summary";
 
 export type ActionType =
@@ -34,6 +33,19 @@ export type ActionType =
   | "mark_false_positive"
   | "hide"
   | "unhide";
+
+// ── Clients ────────────────────────────────────────────────────────────────
+
+export interface ClientInfo {
+  id: string;
+  label: string;
+  display_name: string;
+}
+
+export interface ClientListResponse {
+  simulation_today: string;
+  clients: ClientInfo[];
+}
 
 // ── Subscriptions ──────────────────────────────────────────────────────────
 
@@ -53,6 +65,7 @@ export interface SubscriptionResponse {
   first_payment_date: string;
   last_payment_date: string;
   next_payment_date: string;
+  days_until_next_payment: number;
   n_payments: number;
   status: SubscriptionStatus;
   confidence: SubscriptionConfidence;
@@ -90,6 +103,8 @@ export interface Recommendation {
 export interface AnalyticsResponse {
   client_id: string;
   monthly_total: number;
+  monthly_delta_rub: number | null;
+  monthly_delta_text: string | null;
   potential_savings: number;
   top_3: TopSubscription[];
   recommendations: Recommendation[];
