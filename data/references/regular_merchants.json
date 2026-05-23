@@ -285,5 +285,75 @@
     "mcc_code": "7832",
     "typical_amount_range": [500, 900],
     "frequency_per_month": 0.5
+  },
+  {
+    "name": "Аренда жилья",
+    "category": "rent",
+    "mcc_code": "6513",
+    "typical_amount_range": [25000, 55000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Тинькофф Ипотека",
+    "category": "loan",
+    "mcc_code": "6012",
+    "typical_amount_range": [20000, 60000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Тинькофф Рассрочка",
+    "category": "loan",
+    "mcc_code": "6012",
+    "typical_amount_range": [3000, 7000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Паркинг Центр",
+    "category": "parking",
+    "mcc_code": "7523",
+    "typical_amount_range": [5000, 12000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "АльфаСтрахование",
+    "category": "insurance",
+    "mcc_code": "6300",
+    "typical_amount_range": [1500, 3500],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "УК Жилой Дом",
+    "category": "utilities",
+    "mcc_code": "4900",
+    "typical_amount_range": [1500, 3000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Фитнес Хаус",
+    "category": "fitness",
+    "mcc_code": "7997",
+    "typical_amount_range": [2500, 4000],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Репетитор",
+    "category": "transfer",
+    "mcc_code": "6012",
+    "typical_amount_range": [3000, 7000],
+    "frequency_per_month": 2
+  },
+  {
+    "name": "Дом.ру",
+    "category": "utilities",
+    "mcc_code": "4816",
+    "typical_amount_range": [500, 800],
+    "frequency_per_month": 1
+  },
+  {
+    "name": "Школа английского",
+    "category": "education",
+    "mcc_code": "8299",
+    "typical_amount_range": [4000, 7000],
+    "frequency_per_month": 1
   }
 ]

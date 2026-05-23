@@ -529,18 +529,417 @@ def scenario_family_plan(
 
 
 # ---------------------------------------------------------------------------
+# Вспомогательная функция для hard-negative транзакций
+# ---------------------------------------------------------------------------
+
+def _generate_hard_neg_txns(
+    client_id: str,
+    merchant: dict[str, Any],
+    amount: float,
+    interval_days: int,
+    n_payments: int,
+    rng: np.random.Generator,
+    jitter_days: int = 1,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """
+    Генерирует транзакции с фиксированной суммой и стабильным интервалом.
+
+    Гарантирует прохождение rule-based фильтра (cv_amount≈0, cv_interval<0.1),
+    при этом мерчант маркируется is_subscription=False в labels.csv.
+
+    Возвращает (list[txn], label_row).
+    """
+    txns: list[dict[str, Any]] = []
+    start_dt = (
+        SIMULATION_TODAY - timedelta(days=interval_days * n_payments)
+    ).replace(hour=10, minute=0, second=0, microsecond=0)
+    current_dt = start_dt
+
+    for _ in range(n_payments):
+        jitter = int(rng.integers(-jitter_days, jitter_days + 1))
+        dt = current_dt + timedelta(days=jitter)
+        if dt > SIMULATION_TODAY:
+            break
+        txns.append(_make_txn(client_id, merchant, dt, amount))
+        current_dt += timedelta(days=interval_days)
+
+    label_row: dict[str, Any] = {
+        "client_id": client_id,
+        "merchant_name": merchant["name"],
+        "is_subscription": False,
+        "true_period_days": interval_days,
+        "true_amount": amount,
+        "scenario_tag": "hard_negative",
+    }
+    return txns, label_row
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 11. Арендатор (3 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_renter(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Аренда жилья + Дом.ру + УК Жилой Дом — все три регулярные, но не подписки.
+    Реальная подписка Яндекс.Плюс добавлена для реализма.
+    """
+    persona = PERSONA_BY_NAME["Семейный"]
+    rent_txns, rent_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Аренда жилья"), 38_000.0, 30, 11, rng, 1
+    )
+    domru_txns, domru_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Дом.ру"), 650.0, 30, 11, rng, 2
+    )
+    uk_txns, uk_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "УК Жилой Дом"), 2_100.0, 30, 11, rng, 2
+    )
+    ya_plus = _get_sub(subs_ref, "Яндекс.Плюс")
+    sub_start = SIMULATION_TODAY - timedelta(days=200)
+    sub_plan = _make_plan(
+        client_id, ya_plus, sub_start, None,
+        [(sub_start, float(ya_plus["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=rent_txns + domru_txns + uk_txns,
+        extra_label_rows=[rent_lbl, domru_lbl, uk_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 12. Ипотечник с паркингом и страховкой (3 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_mortgager_1(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Тинькофф Ипотека (jitter=0, банковский автоплатёж) + Паркинг Центр
+    + АльфаСтрахование. Ипотека — максимально стабильный интервал, cv_interval≈0.
+    Реальная подписка iCloud.
+    """
+    persona = PERSONA_BY_NAME["Семейный"]
+    ipoteka_txns, ipoteka_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Тинькофф Ипотека"), 35_000.0, 30, 11, rng, 0
+    )
+    parking_txns, parking_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Паркинг Центр"), 8_500.0, 30, 11, rng, 1
+    )
+    insurance_txns, insurance_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "АльфаСтрахование"), 2_200.0, 30, 11, rng, 1
+    )
+    icloud = _get_sub(subs_ref, "iCloud")
+    sub_start = SIMULATION_TODAY - timedelta(days=250)
+    sub_plan = _make_plan(
+        client_id, icloud, sub_start, None,
+        [(sub_start, float(icloud["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=ipoteka_txns + parking_txns + insurance_txns,
+        extra_label_rows=[ipoteka_lbl, parking_lbl, insurance_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 13. Ипотечник с интернетом и страховкой (3 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_mortgager_2(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Тинькофф Ипотека + Дом.ру (MCC 4816 — подписочный!) + АльфаСтрахование.
+    Дом.ру — самый сложный: MCC совпадает с подписками (iCloud, Яндекс 360).
+    Реальная подписка Кинопоиск HD.
+    """
+    persona = PERSONA_BY_NAME["IT-специалист"]
+    ipoteka_txns, ipoteka_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Тинькофф Ипотека"), 42_000.0, 30, 11, rng, 0
+    )
+    domru_txns, domru_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Дом.ру"), 650.0, 30, 11, rng, 2
+    )
+    insurance_txns, insurance_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "АльфаСтрахование"), 1_900.0, 30, 11, rng, 1
+    )
+    kino = _get_sub(subs_ref, "Кинопоиск HD")
+    sub_start = SIMULATION_TODAY - timedelta(days=260)
+    sub_plan = _make_plan(
+        client_id, kino, sub_start, None,
+        [(sub_start, float(kino["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=ipoteka_txns + domru_txns + insurance_txns,
+        extra_label_rows=[ipoteka_lbl, domru_lbl, insurance_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 14. BNPL-рассрочка и паркинг (2 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_bnpl(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Тинькофф Рассрочка (8 платежей, конечная, jitter=0) + Паркинг Центр.
+    Рассрочка отличается от подписки конечным числом платежей.
+    Реальная подписка Telegram Premium.
+    """
+    persona = PERSONA_BY_NAME["Фрилансер"]
+    bnpl_txns, bnpl_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Тинькофф Рассрочка"), 4_500.0, 30, 8, rng, 0
+    )
+    parking_txns, parking_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Паркинг Центр"), 7_000.0, 30, 11, rng, 1
+    )
+    tg = _get_sub(subs_ref, "Telegram Premium")
+    sub_start = SIMULATION_TODAY - timedelta(days=270)
+    sub_plan = _make_plan(
+        client_id, tg, sub_start, None,
+        [(sub_start, float(tg["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=bnpl_txns + parking_txns,
+        extra_label_rows=[bnpl_lbl, parking_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 15. Учащийся — сложнейшие hard negatives (2 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_learner(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Школа английского (MCC 8299 — подписочный, category='education') +
+    Дом.ру (MCC 4816 — подписочный, category='utilities').
+    Оба имеют подписочный MCC — отличает только in_subscription_dict=False.
+    Реальная подписка Stepik Pro.
+    """
+    persona = PERSONA_BY_NAME["IT-специалист"]
+    school_txns, school_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Школа английского"), 5_500.0, 30, 11, rng, 2
+    )
+    domru_txns, domru_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Дом.ру"), 650.0, 30, 11, rng, 2
+    )
+    stepik = _get_sub(subs_ref, "Stepik Pro")
+    sub_start = SIMULATION_TODAY - timedelta(days=220)
+    sub_plan = _make_plan(
+        client_id, stepik, sub_start, None,
+        [(sub_start, float(stepik["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=school_txns + domru_txns,
+        extra_label_rows=[school_lbl, domru_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 16. Студент с двухнедельным репетитором (2 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_tutor_student(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Репетитор (интервал 14 дней — отличается от типичных 30-дневных подписок) +
+    УК Жилой Дом. Репетитор: 22 платежа за ~10 месяцев.
+    Реальная подписка Яндекс.Музыка.
+    """
+    persona = PERSONA_BY_NAME["Студент"]
+    tutor_txns, tutor_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Репетитор"), 5_000.0, 14, 22, rng, 1
+    )
+    uk_txns, uk_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "УК Жилой Дом"), 1_800.0, 30, 11, rng, 2
+    )
+    ya_music = _get_sub(subs_ref, "Яндекс.Музыка")
+    sub_start = SIMULATION_TODAY - timedelta(days=230)
+    sub_plan = _make_plan(
+        client_id, ya_music, sub_start, None,
+        [(sub_start, float(ya_music["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=tutor_txns + uk_txns,
+        extra_label_rows=[tutor_lbl, uk_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 17. Фитнес и страхование (2 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_fitness(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Фитнес Хаус + АльфаСтрахование. Фитнес — аналог сценария 9 (World Class),
+    но другой клуб и другой клиент; добавляет разнообразие негативов в fitness.
+    Реальная подписка VK Музыка.
+    """
+    persona = PERSONA_BY_NAME["Фрилансер"]
+    fitness_txns, fitness_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Фитнес Хаус"), 2_900.0, 30, 11, rng, 2
+    )
+    insurance_txns, insurance_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "АльфаСтрахование"), 2_400.0, 30, 11, rng, 1
+    )
+    vk_music = _get_sub(subs_ref, "VK Музыка")
+    sub_start = SIMULATION_TODAY - timedelta(days=180)
+    sub_plan = _make_plan(
+        client_id, vk_music, sub_start, None,
+        [(sub_start, float(vk_music["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=fitness_txns + insurance_txns,
+        extra_label_rows=[fitness_lbl, insurance_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 18. Стример-арендатор (2 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_streamer_renter(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Аренда жилья (другая сумма, чем scripted_11) + Фитнес Хаус.
+    Реальная подписка ivi.
+    """
+    persona = PERSONA_BY_NAME["Заядлый стример"]
+    rent_txns, rent_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Аренда жилья"), 31_000.0, 30, 11, rng, 1
+    )
+    fitness_txns, fitness_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Фитнес Хаус"), 3_200.0, 30, 11, rng, 2
+    )
+    ivi = _get_sub(subs_ref, "ivi")
+    sub_start = SIMULATION_TODAY - timedelta(days=240)
+    sub_plan = _make_plan(
+        client_id, ivi, sub_start, None,
+        [(sub_start, float(ivi["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=rent_txns + fitness_txns,
+        extra_label_rows=[rent_lbl, fitness_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
+# Сценарий 19. Минималист с рассрочкой и курсами (3 hard negatives)
+# ---------------------------------------------------------------------------
+
+def scenario_hard_negative_minimalist_bnpl(
+    client_id: str,
+    subs_ref: list[dict],
+    reg_ref: list[dict],
+    rng: np.random.Generator,
+) -> ScriptedClientResult:
+    """
+    Тинькофф Рассрочка (7 платежей) + Школа английского (education/MCC 8299)
+    + УК Жилой Дом. Самый богатый по числу hard-негативов: 3 штуки.
+    Реальная подписка Яндекс 360.
+    """
+    persona = PERSONA_BY_NAME["Минималист"]
+    bnpl_txns, bnpl_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Тинькофф Рассрочка"), 3_800.0, 30, 7, rng, 0
+    )
+    school_txns, school_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "Школа английского"), 4_800.0, 30, 11, rng, 2
+    )
+    uk_txns, uk_lbl = _generate_hard_neg_txns(
+        client_id, _get_merchant(reg_ref, "УК Жилой Дом"), 1_700.0, 30, 11, rng, 2
+    )
+    ya360 = _get_sub(subs_ref, "Яндекс 360")
+    sub_start = SIMULATION_TODAY - timedelta(days=180)
+    sub_plan = _make_plan(
+        client_id, ya360, sub_start, None,
+        [(sub_start, float(ya360["base_price_rub"]))], scenario_tag="regular",
+    )
+    return ScriptedClientResult(
+        client_id=client_id,
+        persona=persona,
+        subscription_plans=[sub_plan],
+        extra_transactions=bnpl_txns + school_txns + uk_txns,
+        extra_label_rows=[bnpl_lbl, school_lbl, uk_lbl],
+    )
+
+
+# ---------------------------------------------------------------------------
 # Реестр (порядок соответствует нумерации в CLAUDE.md)
 # ---------------------------------------------------------------------------
 
 SCRIPTED_SCENARIOS = [
-    scenario_price_increase,       # 1
-    scenario_trial_ending,         # 2
-    scenario_abandoned_gaming,     # 3
-    scenario_heavy_user,           # 4
-    scenario_newbie,               # 5
-    scenario_overlapping_dates,    # 6
-    scenario_former_user,          # 7
-    scenario_duplicate_services,   # 8
-    scenario_false_positive_trap,  # 9
-    scenario_family_plan,          # 10
+    scenario_price_increase,                  # 1
+    scenario_trial_ending,                    # 2
+    scenario_abandoned_gaming,                # 3
+    scenario_heavy_user,                      # 4
+    scenario_newbie,                          # 5
+    scenario_overlapping_dates,               # 6
+    scenario_former_user,                     # 7
+    scenario_duplicate_services,              # 8
+    scenario_false_positive_trap,             # 9
+    scenario_family_plan,                     # 10
+    scenario_hard_negative_renter,            # 11
+    scenario_hard_negative_mortgager_1,       # 12
+    scenario_hard_negative_mortgager_2,       # 13
+    scenario_hard_negative_bnpl,              # 14
+    scenario_hard_negative_learner,           # 15
+    scenario_hard_negative_tutor_student,     # 16
+    scenario_hard_negative_fitness,           # 17
+    scenario_hard_negative_streamer_renter,   # 18
+    scenario_hard_negative_minimalist_bnpl,   # 19
 ]

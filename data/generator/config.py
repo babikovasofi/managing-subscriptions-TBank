@@ -6,7 +6,7 @@ RANDOM_SEED: int = 42
 
 # === Клиенты ===
 N_CLIENTS_RANDOM: int = 140
-N_CLIENTS_SCRIPTED: int = 10
+N_CLIENTS_SCRIPTED: int = 19
 
 # === История ===
 HISTORY_MONTHS: int = 12
