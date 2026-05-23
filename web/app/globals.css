@@ -931,7 +931,8 @@ a { color: inherit; }
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   align-items: end;
-  height: 140px;
+  height: 168px;       /* 140px bars + 28px reserved for value labels */
+  padding-top: 28px;   /* space above bars so labels stay within container */
   margin-bottom: 8px;
 }
 .history__bar {
@@ -953,7 +954,7 @@ a { color: inherit; }
 }
 .history__bar-value {
   position: absolute;
-  top: -18px;
+  top: -26px;
   left: 0; right: 0;
   text-align: center;
   font-family: var(--tb-font-numbers);
