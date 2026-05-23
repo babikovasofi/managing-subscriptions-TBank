@@ -7,6 +7,7 @@ Run once before starting the API:
 
 import json
 import sys
+from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -24,6 +25,17 @@ def main() -> None:
     engine = get_engine()
     Base.metadata.create_all(engine)
     print("Tables created (or already exist).")
+
+    # Skip rebuild if the DB is newer than transactions.csv and already has data.
+    db_path = Path(__file__).parent.parent / "data" / "output" / "subscriptions.db"
+    tx_path = Path(TRANSACTIONS_OUTPUT_PATH)
+    if db_path.exists() and tx_path.exists():
+        _Session = sessionmaker(bind=engine)
+        with _Session() as _s:
+            cached_count = _s.query(SubscriptionCache).count()
+        if cached_count > 0 and db_path.stat().st_mtime > tx_path.stat().st_mtime:
+            print(f"DB is fresh ({cached_count} cached rows, newer than transactions.csv). Skipping rebuild.")
+            return
 
     print("Running ML pipeline on full dataset...")
     results = run_pipeline(TRANSACTIONS_OUTPUT_PATH)

@@ -68,10 +68,12 @@ export default function NotificationsPage() {
   function getTimeDisplay(notifDate: string): string {
     if (!simulationToday) return "";
     const diff = daysUntil(notifDate, simulationToday);
-    if (diff === 0) return "сегодня";
-    if (diff === -1) return "1д";
+    if (diff === 0) return "Сегодня";
+    if (diff === 1) return "Завтра";
+    if (diff > 1) return `Через ${diff}д`;
+    if (diff === -1) return "Вчера";
     if (diff < -7) return "Ранее";
-    return `${Math.abs(diff)}д`;
+    return `${Math.abs(diff)}д назад`;
   }
 
   // Group notifications

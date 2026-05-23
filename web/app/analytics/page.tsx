@@ -13,15 +13,15 @@ import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { formatRub } from "@/lib/utils";
 
 const CAT_COLORS: Record<SubscriptionCategory, string> = {
-  streaming_video: "#6F4FE3",
-  streaming_music: "#E54B6B",
-  cloud_storage:   "#2BA5F0",
-  education:       "#2EAE57",
-  gaming:          "#428BF9",
-  food_delivery:   "#EF8007",
-  productivity:    "#428BF9",
-  reading:         "#E54B6B",
-  other:           "#9E9E9E",
+  streaming_video: "var(--tb-accent)",
+  streaming_music: "#A855F7",
+  cloud_storage:   "#3B82F6",
+  education:       "#10B981",
+  gaming:          "#F59E0B",
+  food_delivery:   "#EF4444",
+  productivity:    "#6366F1",
+  reading:         "#14B8A6",
+  other:           "#9CA3AF",
 };
 
 const CAT_LABELS: Record<SubscriptionCategory, string> = {
