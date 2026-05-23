@@ -136,7 +136,7 @@ CLAUDE.md          — этот файл, для агента
 - `streaming_music` (Яндекс.Музыка, VK Музыка, Звук)
 - `cloud_storage` (Яндекс 360, Облако Mail.ru, МегаФон Облако)
 - `education` (Skillbox, Skyeng, Stepik Pro, GeekBrains)
-- `gaming` (VK Play Cloud, GFN.RU, Яндекс.Игры)
+- `gaming` (VK Play Cloud, GFN.RU, Loudplay)
 - `food_delivery` (СберПрайм, Самокат Подписка)
 - `productivity` (Telegram Premium, VK Combo, Битрикс24 Базовый)
 - `reading` (Литрес Букмейт, МТС Строки, MyBook)
