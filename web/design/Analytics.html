@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Аналитика подписок</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="analytics.css" />
+
+<script src="theme.js"></script>
+</head>
+<body>
+
+<div class="screen" data-screen-label="03 Analytics">
+
+  <main class="app">
+
+      <header class="top-bar">
+        <a href="Subscriptions.html" class="icon-button back-button" aria-label="Назад">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="top-bar__center">Аналитика</div>
+        <div class="top-bar__spacer" aria-hidden="true"></div>
+      </header>
+
+      <!-- Hero — total spend in May -->
+      <section class="an-hero">
+        <div class="an-hero__label">Расходы на подписки в мае</div>
+        <div class="an-hero__sum">
+          <span>2 847&nbsp;₽</span>
+        </div>
+        <div class="an-hero__meta">
+          <span class="an-hero__delta">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1.5l3 3.5H6v3H4V5H2l3-3.5z" fill="currentColor"/></svg>
+            +199 ₽
+          </span>
+          <span>к апрелю</span>
+        </div>
+      </section>
+
+      <!-- Donut + legend -->
+      <section class="donut-card">
+        <div class="donut" aria-hidden="true">
+          <div class="donut__center">
+            <span class="donut__center-value">2 847&nbsp;₽</span>
+            <span class="donut__center-label">всего</span>
+          </div>
+        </div>
+        <ul class="legend">
+          <li class="legend__item">
+            <span class="legend__swatch" style="background:#2EAE57"></span>
+            <span class="legend__label">Обучение</span>
+            <span class="legend__value">1 490</span>
+          </li>
+          <li class="legend__item">
+            <span class="legend__swatch" style="background:#6F4FE3"></span>
+            <span class="legend__label">Видео</span>
+            <span class="legend__value">797</span>
+          </li>
+          <li class="legend__item">
+            <span class="legend__swatch" style="background:#428BF9"></span>
+            <span class="legend__label">Игры</span>
+            <span class="legend__value">402</span>
+          </li>
+          <li class="legend__item">
+            <span class="legend__swatch" style="background:#E54B6B"></span>
+            <span class="legend__label">Музыка</span>
+            <span class="legend__value">299</span>
+          </li>
+          <li class="legend__item">
+            <span class="legend__swatch" style="background:#2BA5F0"></span>
+            <span class="legend__label">Хранилище</span>
+            <span class="legend__value">149</span>
+          </li>
+        </ul>
+      </section>
+
+      <h2 class="section-title">Самые дорогие</h2>
+
+      <ul class="rank-list" role="list">
+        <li>
+          <a class="rank" data-action="open-subscription" data-subscription-id="skillbox" href="Subscription Detail.html">
+            <span class="rank__no">1</span>
+            <div class="cat-icon cat-icon--md cat-icon--edu" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 9l9-4 9 4-9 4-9-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M7 11v4c0 1.5 2.2 2.5 5 2.5s5-1 5-2.5v-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M21 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="rank__body">
+              <div class="rank__name">Skillbox</div>
+              <div class="rank__pct">52% всех расходов</div>
+            </div>
+            <div class="rank__price">1 490 ₽</div>
+          </a>
+        </li>
+        <li>
+          <a class="rank" data-action="open-subscription" data-subscription-id="vk-play-cloud" href="Subscription Detail.html">
+            <span class="rank__no">2</span>
+            <div class="cat-icon cat-icon--md cat-icon--gaming" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9h12a3 3 0 013 3v2a3 3 0 01-3 3h-1l-1.5-2h-7L7 17H6a3 3 0 01-3-3v-2a3 3 0 013-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="9" cy="13" r="1" fill="currentColor"/>
+                <circle cx="15" cy="13" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="rank__body">
+              <div class="rank__name">VK Play Cloud</div>
+              <div class="rank__pct">14% · не используется</div>
+            </div>
+            <div class="rank__price">402 ₽</div>
+          </a>
+        </li>
+        <li>
+          <a class="rank" data-action="open-subscription" data-subscription-id="kinopoisk-hd" href="Subscription Detail.html">
+            <span class="rank__no">3</span>
+            <div class="cat-icon cat-icon--md cat-icon--cinema" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 9h18M3 15h18M7 6v12M17 6v12" stroke="currentColor" stroke-width="1.4" opacity=".8"/>
+              </svg>
+            </div>
+            <div class="rank__body">
+              <div class="rank__name">Кинопоиск HD</div>
+              <div class="rank__pct">14% · цена выросла</div>
+            </div>
+            <div class="rank__price">398 ₽</div>
+          </a>
+        </li>
+      </ul>
+
+      <h2 class="section-title">Можно сэкономить</h2>
+
+      <section class="save-insight">
+        <div class="save-insight__head">
+          <div class="cat-icon cat-icon--md cat-icon--summary" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5 7 .5-5.5 4.5 1.8 6.8L12 16.5l-5.8 3.8 1.8-6.8L2.5 9l7-.5L12 2z" fill="currentColor"/></svg>
+          </div>
+          <div>
+            <div class="save-insight__amount">801&nbsp;₽</div>
+            <div class="save-insight__caption">потенциальная экономия в месяц</div>
+          </div>
+        </div>
+
+        <ul class="save-insight__list" role="list">
+          <li class="save-insight__item">
+            <span class="save-insight__dot" aria-hidden="true"></span>
+            <span>
+              <b>Отказаться от VK Play Cloud — 402 ₽.</b>
+              Вы не открывали сервис 42 дня.
+            </span>
+          </li>
+          <li class="save-insight__item">
+            <span class="save-insight__dot" aria-hidden="true"></span>
+            <span>
+              <b>Отменить пробный ivi — 399 ₽.</b>
+              Если оставить, начнёт списываться 24 мая.
+            </span>
+          </li>
+        </ul>
+
+      </section>
+
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Основная навигация">
+      <a href="Subscriptions.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a href="Analytics.html" class="tab tab--active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 15v-3M12 15V9M16 15v-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span>Аналитика</span>
+      </a>
+      <a href="Notifications.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2H4.5L6 17z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Уведомления</span>
+      </a>
+      <a href="Add Subscription.html" class="tab tab--add">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <span>Добавить</span>
+      </a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Кинопоиск HD — Подписка</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="detail.css" />
+
+<script src="theme.js"></script>
+</head>
+<body>
+
+<div class="screen" data-screen-label="02 Subscription Detail">
+
+  <main class="app">
+
+      <!-- Top bar: back + title + theme toggle -->
+      <header class="top-bar">
+        <a href="Subscriptions.html" class="icon-button back-button" aria-label="Назад">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="top-bar__center">Подписка</div>
+        <div class="top-bar__spacer" aria-hidden="true"></div>
+      </header>
+
+      <!-- Hero card -->
+      <section class="detail-hero">
+        <div class="detail-hero__head">
+          <div class="cat-icon cat-icon--lg cat-icon--cinema" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M3 9h18M3 15h18M7 6v12M17 6v12" stroke="currentColor" stroke-width="1.4" opacity=".8"/>
+            </svg>
+          </div>
+          <div class="detail-hero__meta">
+            <div class="detail-hero__name">Кинопоиск HD</div>
+            <div class="detail-hero__sub">Видеосервис · Подписка списывается автоматически</div>
+          </div>
+        </div>
+
+        <div class="detail-hero__price-row">
+          <span class="detail-hero__price">
+            398&nbsp;₽
+            <span class="detail-hero__price-suffix">в&nbsp;месяц</span>
+          </span>
+          <span class="badge badge--lg badge--price">
+            <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 2l4 4.5H8V10H4V6.5H2L6 2z" fill="currentColor"/></svg>
+            Цена выросла
+          </span>
+        </div>
+
+        <div class="detail-hero__next">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="2" y="3" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h10M5 2v3M9 2v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Следующее списание <b>22 мая</b>, через 3 дня
+        </div>
+      </section>
+
+      <!-- Card: Что происходит -->
+      <section class="card">
+        <h2 class="card__title">Что происходит</h2>
+        <div class="explain__delta">
+          <span class="explain__old">299&nbsp;₽</span>
+          <span class="explain__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 8l3-3 3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="explain__new">398&nbsp;₽</span>
+          <span class="explain__delta-badge">+33%</span>
+        </div>
+        <p class="explain__text">
+          Цена месячной подписки выросла с&nbsp;<b style="color:var(--text-1);font-weight:600">1 апреля 2026</b>.
+          За год вы заплатите на <b style="color:var(--text-1);font-weight:600">1&nbsp;188&nbsp;₽</b> больше.
+        </p>
+      </section>
+
+      <!-- Card: История списаний -->
+      <section class="card">
+        <h2 class="card__title">История списаний</h2>
+        <div class="history__legend">
+          <span class="history__legend-item"><span class="history__legend-swatch history__legend-swatch--old"></span>299 ₽</span>
+          <span class="history__legend-item"><span class="history__legend-swatch history__legend-swatch--new"></span>398 ₽</span>
+        </div>
+        <div class="history__chart" aria-hidden="true">
+          <div class="history__bar">
+            <div class="history__bar-fill" style="height: 75%;">
+              <span class="history__bar-value">299</span>
+            </div>
+          </div>
+          <div class="history__bar">
+            <div class="history__bar-fill" style="height: 75%;">
+              <span class="history__bar-value">299</span>
+            </div>
+          </div>
+          <div class="history__bar">
+            <div class="history__bar-fill" style="height: 75%;">
+              <span class="history__bar-value">299</span>
+            </div>
+          </div>
+          <div class="history__bar">
+            <div class="history__bar-fill" style="height: 75%;">
+              <span class="history__bar-value">299</span>
+            </div>
+          </div>
+          <div class="history__bar history__bar--new">
+            <div class="history__bar-fill" style="height: 100%;">
+              <span class="history__bar-value">398</span>
+            </div>
+          </div>
+          <div class="history__bar history__bar--new">
+            <div class="history__bar-fill" style="height: 100%;">
+              <span class="history__bar-value">398</span>
+            </div>
+          </div>
+        </div>
+        <div class="history__labels">
+          <span class="history__label">Дек</span>
+          <span class="history__label">Янв</span>
+          <span class="history__label">Фев</span>
+          <span class="history__label">Мар</span>
+          <span class="history__label">Апр</span>
+          <span class="history__label history__label--current">Май</span>
+        </div>
+      </section>
+
+      <!-- Card: Действия -->
+      <ul class="actions" role="list">
+        <li>
+          <label class="action" data-action="toggle-important">
+            <div class="action__body">
+              <div class="action__title">Важная подписка</div>
+              <div class="action__sub">Не предлагать отключить и закрепить наверху</div>
+            </div>
+            <span class="toggle">
+              <input type="checkbox" />
+              <span class="toggle__track"><span class="toggle__thumb"></span></span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <label class="action" data-action="toggle-notifications">
+            <div class="action__body">
+              <div class="action__title">Уведомления</div>
+              <div class="action__sub">За день до списания и при изменениях</div>
+            </div>
+            <span class="toggle">
+              <input type="checkbox" checked />
+              <span class="toggle__track"><span class="toggle__thumb"></span></span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <a class="action" data-action="mark-not-subscription" href="#">
+            <div class="action__body">
+              <div class="action__title">Это не подписка</div>
+              <div class="action__sub">Помечу как разовый платёж</div>
+            </div>
+            <span class="action__chev" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="action action--destructive" data-action="hide-subscription" href="#">
+            <div class="action__body">
+              <div class="action__title">Скрыть подписку</div>
+              <div class="action__sub">Перестанет показываться в списке</div>
+            </div>
+            <span class="action__chev" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="detail-bottom-pad"></div>
+
+  </main>
+</div>
+
+<!-- Bottom tab bar -->
+<nav class="tabbar" aria-label="Основная навигация">
+      <a href="Subscriptions.html" class="tab tab--active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a href="Analytics.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 15v-3M12 15V9M16 15v-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span>Аналитика</span>
+      </a>
+      <a href="Notifications.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2H4.5L6 17z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Уведомления</span>
+      </a>
+      <a href="Add Subscription.html" class="tab tab--add">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <span>Добавить</span>
+      </a>
+</nav>
+
+</body>
+</html>

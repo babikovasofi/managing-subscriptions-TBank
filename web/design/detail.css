@@ -1,0 +1,253 @@
+/* ===========================================================
+   detail.css — экран «Детали подписки»
+   =========================================================== */
+
+/* ---- Hero card --------------------------------------------- */
+.detail-hero {
+  margin: 8px var(--tb-gutter) 16px;
+  padding: 20px;
+  background: var(--surface-1);
+  border-radius: var(--tb-radius-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.detail-hero__head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.detail-hero__meta {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.detail-hero__name {
+  font-size: var(--tb-fs-h1);
+  line-height: var(--tb-lh-h1);
+  font-weight: var(--tb-fw-black);
+  color: var(--text-1);
+  letter-spacing: -0.4px;
+}
+.detail-hero__sub {
+  margin-top: 2px;
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+}
+
+.detail-hero__price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.detail-hero__price {
+  font-family: var(--tb-font-numbers);
+  font-weight: var(--tb-fw-black);
+  font-size: var(--tb-fs-display);
+  line-height: var(--tb-lh-display);
+  color: var(--text-1);
+  letter-spacing: -1px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.detail-hero__price-suffix {
+  font-family: var(--tb-font-text);
+  font-size: 17px;
+  font-weight: var(--tb-fw-medium);
+  color: var(--text-2);
+}
+
+.detail-hero__next {
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+  border-top: 1px solid var(--divider);
+  padding-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.detail-hero__next b {
+  color: var(--text-1);
+  font-weight: var(--tb-fw-semibold);
+}
+
+/* ---- "Что происходит" card -------------------------------- */
+.explain__delta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.explain__old {
+  font-family: var(--tb-font-numbers);
+  font-size: 22px;
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-3);
+  text-decoration: line-through;
+  letter-spacing: -0.3px;
+}
+.explain__arrow { color: var(--tb-warning-fg); display: inline-flex; }
+.explain__new {
+  font-family: var(--tb-font-numbers);
+  font-size: 28px;
+  font-weight: var(--tb-fw-black);
+  color: var(--text-1);
+  letter-spacing: -0.5px;
+}
+.explain__delta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--bg-warn-pale);
+  color: var(--tb-warning-fg);
+  font-size: 11px;
+  font-weight: var(--tb-fw-bold);
+  align-self: center;
+}
+[data-theme="light"] .explain__delta-badge { color: #B25A04; }
+.explain__text {
+  font-size: var(--tb-fs-body);
+  line-height: 20px;
+  color: var(--text-2);
+}
+
+/* ---- "История списаний" card — bar chart ------------------ */
+.history__legend {
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+}
+.history__legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.history__legend-swatch {
+  width: 10px; height: 10px; border-radius: 3px; display: inline-block;
+}
+.history__legend-swatch--old { background: var(--surface-3); }
+.history__legend-swatch--new { background: var(--tb-warning-fg); }
+
+.history__chart {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  align-items: end;
+  height: 140px;
+  margin-bottom: 8px;
+}
+.history__bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+.history__bar-fill {
+  width: 100%;
+  border-radius: 8px 8px 4px 4px;
+  background: var(--surface-3);
+  position: relative;
+}
+.history__bar--new .history__bar-fill {
+  background: var(--tb-warning-fg);
+}
+.history__bar-value {
+  position: absolute;
+  top: -18px;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--tb-font-numbers);
+  font-size: 11px;
+  font-weight: var(--tb-fw-bold);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.history__bar--new .history__bar-value { color: var(--tb-warning-fg); }
+.history__labels {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.history__label {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: var(--tb-fw-semibold);
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+.history__label--current { color: var(--text-1); }
+
+/* ---- Actions / settings rows ------------------------------ */
+.actions {
+  list-style: none;
+  background: var(--surface-1);
+  border-radius: var(--tb-radius-2xl);
+  margin: 0 var(--tb-gutter) 12px;
+  overflow: hidden;
+}
+.action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background .15s ease;
+  position: relative;
+  color: var(--text-1);
+  text-decoration: none;
+}
+.action:hover { background: var(--surface-3); }
+.action + .action::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  border-top: 1px solid var(--divider);
+}
+.action__body { flex: 1 1 auto; min-width: 0; }
+.action__title {
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  line-height: 22px;
+  color: var(--text-1);
+}
+.action__sub {
+  margin-top: 2px;
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+}
+.action--destructive .action__title { color: var(--tb-negative); }
+.action__chev { color: var(--text-3); }
+
+/* ---- iOS-style toggle ------------------------------------ */
+.toggle { position: relative; width: 50px; height: 30px; flex: 0 0 50px; cursor: pointer; }
+.toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; z-index: 1; }
+.toggle__track {
+  display: block; width: 100%; height: 100%;
+  background: var(--chip-bg);
+  border-radius: 999px;
+  transition: background .2s ease;
+  position: relative;
+}
+.toggle__thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 26px; height: 26px;
+  background: #FFFFFF;
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  transition: transform .2s ease;
+}
+.toggle input:checked + .toggle__track {
+  background: var(--tb-positive-fg);
+}
+.toggle input:checked + .toggle__track .toggle__thumb {
+  transform: translateX(20px);
+}
+
+/* ---- Bottom safety pad ------------------------------------ */
+.detail-bottom-pad { height: 16px; }

@@ -1,0 +1,377 @@
+/* ============================================================
+   T-Bank-inspired Subscriptions — Design System (handoff bundle)
+   ------------------------------------------------------------
+   Один файл, готовый к подключению в Next.js. Содержит:
+     1. Цветовые токены (палитра)
+     2. Темы: dark (default) + light
+     3. Радиусы, тени, типографика, сетка
+     4. Утилиты типографики (.ds-*)
+     5. Стили кнопок (.btn--primary | secondary | ghost | destructive)
+     6. Стили бейджей по 4 статусам подписок
+     7. Категорийные иконки (.cat-icon--*)
+   Префикс переменных: --tb-*  (theme-invariant)
+                       --surface-*, --text-*, --border-* … (роль, зависят от темы)
+   ============================================================ */
+
+/* ────────────────────────────────────────────────────────────
+   1. ПАЛИТРА (theme-invariant константы)
+   ──────────────────────────────────────────────────────────── */
+:root {
+  /* Brand yellow */
+  --tb-yellow:           #FFDD2D;
+  --tb-yellow-hover:     #FFCD33;
+  --tb-yellow-pressed:   #FAB619;
+  --tb-yellow-tint:      #FFDD2D4D;      /* 30% — for warning fills */
+  --tb-on-yellow:        #1B1B1B;        /* dark text on yellow */
+
+  /* Blue — action / link */
+  --tb-blue:             #428BF9;
+  --tb-blue-hover:       #126DF7;
+  --tb-blue-pressed:     #156ED4;
+  --tb-blue-pale:        #428BF914;
+  --tb-blue-info:        #428BF929;
+
+  /* Status semantics */
+  --tb-positive:         #00A328;
+  --tb-positive-fg:      #00B92D;
+  --tb-positive-bg:      #00B92D29;
+  --tb-negative:         #F52222;        /* destructive ONLY */
+  --tb-negative-bg:      #F5222224;
+  --tb-warning:          #EF8007;
+  --tb-warning-fg:       #FFCD33;
+
+  /* Category palette (avatar circles) */
+  --cat-cinema:    #6F4FE3;   /* violet */
+  --cat-cinema-2:  #E54B6B;   /* pink-red (streaming alt) */
+  --cat-music:     #E54B6B;
+  --cat-gaming:    #428BF9;
+  --cat-cloud:     #2BA5F0;
+  --cat-edu:       #2EAE57;
+
+  /* Radii */
+  --tb-radius-xs:   6px;
+  --tb-radius-sm:   8px;
+  --tb-radius-md:  12px;     /* buttons-secondary, chips */
+  --tb-radius-lg:  16px;     /* buttons-primary */
+  --tb-radius-xl:  20px;
+  --tb-radius-2xl: 24px;     /* big container cards */
+  --tb-radius-pill: 999px;
+
+  /* Shadows */
+  --tb-shadow-sm:    0 5px 20px 0 #0000001A;
+  --tb-shadow-md:    0 6px 34px 0 #0000001F;
+  --tb-shadow-popup: 0 8px 28px 0 #00000029;
+
+  /* Typography — fonts */
+  --tb-font-text:    "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --tb-font-heading: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --tb-font-numbers: "Manrope", ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Type scale (mobile, base 15) */
+  --tb-fs-display: 44px;  --tb-lh-display: 48px;  /* hero amount */
+  --tb-fs-h0:      32px;  --tb-lh-h0:      36px;  /* screen heading */
+  --tb-fs-h1:      24px;  --tb-lh-h1:      28px;  /* section */
+  --tb-fs-h2:      20px;  --tb-lh-h2:      24px;
+  --tb-fs-h3:      17px;  --tb-lh-h3:      24px;
+  --tb-fs-body:    15px;  --tb-lh-body:    20px;
+  --tb-fs-bodyL:   17px;  --tb-lh-bodyL:   22px;  /* row title, button */
+  --tb-fs-sm:      13px;  --tb-lh-sm:      16px;
+  --tb-fs-xs:      11px;  --tb-lh-xs:      16px;
+
+  --tb-fw-regular: 400;
+  --tb-fw-medium:  500;
+  --tb-fw-semibold:600;
+  --tb-fw-bold:    700;
+  --tb-fw-black:   800;
+
+  /* Grid */
+  --tb-gutter:  16px;
+  --tb-section: 24px;
+  --tb-item:    12px;
+  --tb-tap:     48px;       /* min hit-target */
+}
+
+/* ────────────────────────────────────────────────────────────
+   2. ТЕМЫ — переключаются через [data-theme="dark|light"] на <html>
+   ──────────────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --surface-page:        #000000;
+  --surface-1:           #1C1C1E;        /* cards */
+  --surface-2:           #2A2A2C;        /* input fill */
+  --surface-3:           #38383A;        /* hover, divider tile */
+  --surface-inverse:     #FFFFFF;
+
+  --text-1:              #FFFFFF;
+  --text-2:              #FFFFFFB3;
+  --text-3:              #FFFFFF80;
+  --text-link:           #6EA8FA;        /* legible blue on dark */
+  --text-on-yellow:      #1B1B1B;
+
+  --border-1:            #FFFFFF14;
+  --border-2:            #FFFFFF26;
+  --divider:             #FFFFFF12;
+
+  --chip-bg:             #FFFFFF14;
+  --chip-bg-active:      #FFFFFF1F;
+
+  --bg-info-pale:        #428BF929;
+  --bg-warn-pale:        #EF800729;
+  --bg-positive-pale:    #00A32829;
+
+  --tabbar-bg:           rgba(20,20,22,.86);
+  --tabbar-border:       #FFFFFF14;
+
+  color-scheme: dark;
+}
+[data-theme="light"] {
+  --surface-page:        #F6F7F8;
+  --surface-1:           #FFFFFF;
+  --surface-2:           #F6F7F8;
+  --surface-3:           #EDEFF2;
+  --surface-inverse:     #1C1C1E;
+
+  --text-1:              #000000CC;
+  --text-2:              #0000008A;
+  --text-3:              #00000066;
+  --text-link:           #126DF7;
+  --text-on-yellow:      #1B1B1B;
+
+  --border-1:            #0010241F;
+  --border-2:            #00102438;
+  --divider:             #00102412;
+
+  --chip-bg:             #244A7F0F;
+  --chip-bg-active:      #244A7F17;
+
+  --bg-info-pale:        #428BF914;
+  --bg-warn-pale:        #EF80071A;
+  --bg-positive-pale:    #00A3281A;
+
+  --tabbar-bg:           rgba(255,255,255,.92);
+  --tabbar-border:       #00102412;
+
+  color-scheme: light;
+}
+
+/* ────────────────────────────────────────────────────────────
+   3. ТИПОГРАФИКА — утилиты для готовой иерархии
+   ──────────────────────────────────────────────────────────── */
+.ds-display {
+  font-family: var(--tb-font-numbers);
+  font-weight: var(--tb-fw-black);
+  font-size: var(--tb-fs-display);
+  line-height: var(--tb-lh-display);
+  letter-spacing: -1px;
+  color: var(--text-1);
+}
+.ds-h0 {
+  font-family: var(--tb-font-heading);
+  font-weight: var(--tb-fw-black);
+  font-size: var(--tb-fs-h0);
+  line-height: var(--tb-lh-h0);
+  letter-spacing: -0.6px;
+  color: var(--text-1);
+}
+.ds-h1 {
+  font-family: var(--tb-font-heading);
+  font-weight: var(--tb-fw-black);
+  font-size: var(--tb-fs-h1);
+  line-height: var(--tb-lh-h1);
+  letter-spacing: -0.4px;
+  color: var(--text-1);
+}
+.ds-h2 {
+  font-family: var(--tb-font-heading);
+  font-weight: var(--tb-fw-bold);
+  font-size: var(--tb-fs-h2);
+  line-height: var(--tb-lh-h2);
+  letter-spacing: -0.2px;
+  color: var(--text-1);
+}
+.ds-h3 {
+  font-family: var(--tb-font-text);
+  font-weight: var(--tb-fw-semibold);
+  font-size: var(--tb-fs-h3);
+  line-height: var(--tb-lh-h3);
+  color: var(--text-1);
+}
+.ds-body {
+  font-family: var(--tb-font-text);
+  font-weight: var(--tb-fw-regular);
+  font-size: var(--tb-fs-body);
+  line-height: var(--tb-lh-body);
+  color: var(--text-1);
+}
+.ds-body-l {
+  font-family: var(--tb-font-text);
+  font-weight: var(--tb-fw-semibold);
+  font-size: var(--tb-fs-bodyL);
+  line-height: var(--tb-lh-bodyL);
+  color: var(--text-1);
+}
+.ds-sm  { font-size: var(--tb-fs-sm); line-height: var(--tb-lh-sm); color: var(--text-2); }
+.ds-xs  { font-size: var(--tb-fs-xs); line-height: var(--tb-lh-xs); color: var(--text-3); letter-spacing: 0.4px; }
+.ds-num { font-family: var(--tb-font-numbers); font-feature-settings: "tnum" 1; letter-spacing: -0.1px; }
+
+/* ────────────────────────────────────────────────────────────
+   4. КНОПКИ
+   ──────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--tb-fw-semibold);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+  line-height: 1;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--tb-blue);
+  outline-offset: 2px;
+}
+.btn--lg { height: 56px; padding: 0 20px; border-radius: var(--tb-radius-lg); font-size: var(--tb-fs-bodyL); }
+.btn--md { height: 48px; padding: 0 16px; border-radius: var(--tb-radius-md); font-size: var(--tb-fs-bodyL); }
+.btn--sm { height: 36px; padding: 0 12px; border-radius: var(--tb-radius-sm); font-size: var(--tb-fs-body); }
+.btn--block { width: 100%; }
+
+.btn--primary {
+  background: var(--tb-yellow);
+  color: var(--text-on-yellow);
+}
+.btn--primary:hover  { background: var(--tb-yellow-hover); }
+.btn--primary:active { background: var(--tb-yellow-pressed); }
+.btn--primary:visited { color: var(--text-on-yellow); }
+
+.btn--secondary {
+  background: var(--chip-bg);
+  color: var(--text-1);
+}
+.btn--secondary:hover  { background: var(--chip-bg-active); }
+.btn--secondary:active { background: var(--chip-bg-active); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-link);
+}
+.btn--ghost:hover { color: var(--tb-blue-pressed); }
+
+.btn--destructive {
+  background: var(--tb-negative-bg);
+  color: var(--tb-negative);
+}
+.btn--destructive:hover { background: color-mix(in srgb, var(--tb-negative) 25%, transparent); }
+
+/* ────────────────────────────────────────────────────────────
+   5. БЕЙДЖИ СТАТУСОВ — 4 уровня salience
+   ────────────────────────────────────────────────────────────
+   Дизайн-принцип: дедлайн → solid; информативный сигнал → tinted;
+   мягкий намёк → нейтраль + цветная точка; норма → отсутствие чипа.
+
+   Применение:
+     <span class="badge badge--trial">Пробный · 2 дня</span>
+     <span class="badge badge--price">Цена выросла</span>
+     <span class="badge badge--unused">Не используется</span>
+     <li data-status="active">…</li>   ← без чипа; зелёная точка опц.
+   ──────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--tb-radius-pill);
+  font-size: 11px;
+  font-weight: var(--tb-fw-bold);
+  line-height: 1;
+  white-space: nowrap;
+}
+.badge--lg {
+  height: 28px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+.badge svg     { width: 10px; height: 10px; }
+.badge--lg svg { width: 12px; height: 12px; }
+
+/* Level 1 — DEADLINE: trial_ending */
+.badge--trial {
+  background: var(--tb-warning);
+  color: #FFFFFF;
+  letter-spacing: 0.1px;
+}
+
+/* Level 2 — INFORMATIVE SIGNAL: price_increased */
+.badge--price {
+  background: var(--bg-warn-pale);
+  color: var(--tb-warning-fg);                 /* dark theme */
+}
+[data-theme="light"] .badge--price { color: #B25A04; }   /* light: darker for AA */
+
+/* Level 3 — SOFT HINT: possibly_unused */
+.badge--unused {
+  gap: 6px;
+  padding-left: 6px;
+  background: var(--chip-bg);
+  color: var(--text-2);
+  font-weight: var(--tb-fw-semibold);
+}
+.badge--unused::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--tb-warning-fg);            /* warm amber dot, NOT red */
+}
+
+/* Optional positive chip (rarely used — actives don't need a chip) */
+.badge--active {
+  gap: 6px;
+  padding-left: 6px;
+  background: var(--bg-positive-pale);
+  color: var(--tb-positive-fg);
+}
+.badge--active::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--tb-positive-fg);
+}
+.badge--info {
+  background: var(--bg-info-pale);
+  color: var(--text-link);
+}
+
+/* Tone rule:
+   Red (#F52222) is reserved for destructive ACTIONS only (delete/hide).
+   Never use red for status badges — a bank should not alarm the user
+   over a price hike or unused subscription. */
+
+/* ────────────────────────────────────────────────────────────
+   6. КАТЕГОРИЙНЫЕ ИКОНКИ — circular avatar tiles
+   ──────────────────────────────────────────────────────────── */
+.cat-icon {
+  border-radius: var(--tb-radius-pill);
+  display: grid; place-items: center;
+  color: #FFFFFF;
+  flex: 0 0 auto;
+}
+.cat-icon--sm  { width: 36px; height: 36px; }
+.cat-icon--sm svg { width: 18px; height: 18px; }
+.cat-icon--md  { width: 44px; height: 44px; }
+.cat-icon--md svg { width: 22px; height: 22px; }
+.cat-icon--lg  { width: 80px; height: 80px; }
+.cat-icon--lg svg { width: 40px; height: 40px; }
+
+.cat-icon--cinema   { background: var(--cat-cinema); }
+.cat-icon--cinema-2 { background: var(--cat-cinema-2); }
+.cat-icon--music    { background: var(--cat-music); }
+.cat-icon--gaming   { background: var(--cat-gaming); }
+.cat-icon--cloud    { background: var(--cat-cloud); }
+.cat-icon--edu      { background: var(--cat-edu); }
+.cat-icon--alert    { background: var(--tb-warning); }
+.cat-icon--info     { background: var(--tb-blue); }
+.cat-icon--summary  { background: var(--tb-yellow); color: var(--text-on-yellow); }

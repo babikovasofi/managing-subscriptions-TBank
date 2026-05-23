@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Уведомления о подписках</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="notifications.css" />
+
+<script src="theme.js"></script>
+</head>
+<body>
+
+<div class="screen" data-screen-label="04 Notifications">
+
+  <main class="app">
+
+      <header class="top-bar">
+        <a href="Subscriptions.html" class="icon-button back-button" aria-label="Назад">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="top-bar__center">Уведомления</div>
+        <div class="top-bar__spacer" aria-hidden="true"></div>
+      </header>
+
+      <div class="day-label">Сегодня</div>
+      <ul class="notif-list" role="list">
+
+        <li>
+          <a class="notif notif--unread" data-action="open-notification" data-notification-id="price-increased-kinopoisk" href="Subscription Detail.html">
+            <div class="cat-icon cat-icon--sm cat-icon--alert" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M10 3l4 5h-2.5v5h-3V8H6l4-5z" fill="currentColor"/></svg>
+            </div>
+            <div class="notif__body">
+              <div class="notif__title">Цена выросла</div>
+              <div class="notif__text">
+                <b>Кинопоиск HD</b> подорожал с 299 до <b>398 ₽</b>. Спишется 22 мая.
+              </div>
+            </div>
+            <span class="notif__right">
+              <span class="notif__time">2ч</span>
+              <span class="notif__dot" aria-label="Не прочитано"></span>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a class="notif notif--unread" data-action="open-notification" data-notification-id="trial-ending-ivi" href="Subscription Detail.html">
+            <div class="cat-icon cat-icon--sm cat-icon--alert" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M10 6v4l2.5 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="notif__body">
+              <div class="notif__title">Пробный заканчивается</div>
+              <div class="notif__text">
+                Через 2 дня <b>ivi</b> начнёт списывать <b>399 ₽</b> в месяц.
+              </div>
+            </div>
+            <span class="notif__right">
+              <span class="notif__time">5ч</span>
+              <span class="notif__dot" aria-label="Не прочитано"></span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="day-label">Вчера</div>
+      <ul class="notif-list" role="list">
+        <li>
+          <a class="notif" data-action="open-notification" data-notification-id="possibly-unused-vk" href="Subscription Detail.html">
+            <div class="cat-icon cat-icon--sm cat-icon--gaming" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M5 8h10a2 2 0 012 2v2a2 2 0 01-2 2h-1l-1-1H7l-1 1H5a2 2 0 01-2-2v-2a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="notif__body">
+              <div class="notif__title">Возможно не используете</div>
+              <div class="notif__text">
+                Вы не открывали <b>VK Play Cloud</b> 42 дня. Подписка стоит 402 ₽ в&nbsp;месяц.
+              </div>
+            </div>
+            <span class="notif__right">
+              <span class="notif__time">1д</span>
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a class="notif" data-action="open-notification" data-notification-id="upcoming-charge-yandex-music" href="Subscription Detail.html">
+            <div class="cat-icon cat-icon--sm cat-icon--info" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="1.6" stroke="currentColor" stroke-width="1.5"/><path d="M3 8h14M7 3v3M13 3v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="notif__body">
+              <div class="notif__title">Скоро списание</div>
+              <div class="notif__text">
+                28 мая спишется <b>299 ₽</b> за <b>Яндекс.Музыку</b>.
+              </div>
+            </div>
+            <span class="notif__right">
+              <span class="notif__time">1д</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="day-label">Ранее</div>
+      <ul class="notif-list" role="list">
+        <li>
+          <a class="notif" data-action="open-notification" data-notification-id="summary-april" href="Analytics.html">
+            <div class="cat-icon cat-icon--sm cat-icon--summary" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M3 17V4M3 17h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 13V9M11 13V6M15 13V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="notif__body">
+              <div class="notif__title">Сводка за апрель</div>
+              <div class="notif__text">
+                Потратили на подписки <b>2 648 ₽</b>. На <b>199 ₽</b> меньше, чем в мае.
+              </div>
+            </div>
+            <span class="notif__right">
+              <span class="notif__time">3д</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Основная навигация">
+      <a href="Subscriptions.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M7 9h10M7 12h10M7 15h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Подписки</span>
+      </a>
+      <a href="Analytics.html" class="tab">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 15v-3M12 15V9M16 15v-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span>Аналитика</span>
+      </a>
+      <a href="Notifications.html" class="tab tab--active" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2H4.5L6 17z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20a2 2 0 004 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Уведомления</span>
+      </a>
+      <a href="Add Subscription.html" class="tab tab--add">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <span>Добавить</span>
+      </a>
+</nav>
+
+</body>
+</html>

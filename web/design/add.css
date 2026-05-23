@@ -1,0 +1,220 @@
+/* ===========================================================
+   add.css — экран «Добавить подписку» (mobile bottom-sheet)
+   =========================================================== */
+
+/* ---- Backdrop: full-viewport dim overlay ------------------ */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 40;
+}
+[data-theme="light"] .sheet-backdrop { background: rgba(0, 0, 0, .35); }
+
+/* ---- Bottom-sheet ----------------------------------------- */
+.sheet {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  max-height: calc(100dvh - 56px);
+  z-index: 50;
+  background: var(--surface-1);
+  border-radius: 24px 24px 0 0;
+  padding: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.25);
+  animation: sheetIn .35s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes sheetIn {
+  from { transform: translate(-50%, 20%); opacity: 0; }
+  to   { transform: translate(-50%, 0);   opacity: 1; }
+}
+.sheet__grabber {
+  width: 36px; height: 5px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  margin: 0 auto 12px;
+}
+
+.sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 var(--tb-gutter) 8px;
+}
+.sheet__title {
+  font-size: var(--tb-fs-h0);
+  line-height: var(--tb-lh-h0);
+  font-weight: var(--tb-fw-black);
+  color: var(--text-1);
+  letter-spacing: -0.6px;
+}
+.sheet__close {
+  flex: 0 0 44px;
+  width: 44px; height: 44px;        /* tap target */
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text-2);
+  border: 0;
+  display: grid; place-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sheet__close svg { width: 16px; height: 16px; }
+
+.sheet__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 8px var(--tb-gutter) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---- Form fields — floating-label underline style --------- */
+.field {
+  position: relative;
+  padding: 18px 0 12px;
+  border-bottom: 1px solid var(--divider);
+}
+.field__label {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  font-size: var(--tb-fs-bodyL);
+  color: var(--text-3);
+  pointer-events: none;
+  transition: transform .2s ease, color .2s ease, font-size .2s ease;
+  transform-origin: left top;
+}
+.field__input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-1);
+  outline: none;
+  padding: 4px 0 4px;
+  height: 28px;
+}
+.field__input:focus + .field__label,
+.field__input:not(:placeholder-shown) + .field__label,
+.field--filled .field__label {
+  transform: translateY(-18px);
+  font-size: 12px;
+  color: var(--text-2);
+}
+.field__suffix {
+  position: absolute;
+  right: 0; top: 22px;
+  font-family: var(--tb-font-numbers);
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-2);
+}
+
+/* Period — segmented control */
+.field--period { display: flex; flex-direction: column; gap: 8px; padding: 16px 0; }
+.field--period .field__label-static {
+  position: static;
+  font-size: 12px;
+  color: var(--text-2);
+  font-weight: var(--tb-fw-medium);
+}
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--chip-bg);
+  border-radius: var(--tb-radius-md);
+}
+.segmented__item {
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--tb-fs-body);
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-2);
+  padding: 10px 0;
+  min-height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.segmented__item--active {
+  background: var(--surface-1);
+  color: var(--text-1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08);
+}
+[data-theme="dark"] .segmented__item--active { box-shadow: none; background: var(--surface-3); }
+
+/* Category — row picker */
+.field--picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  cursor: pointer;
+  min-height: 56px;
+  border-bottom: 1px solid var(--divider);
+}
+.field--picker .field__col {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.field--picker .field__hint {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 2px;
+  font-weight: var(--tb-fw-medium);
+}
+.field--picker .field__value {
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.field--picker .field__chev { color: var(--text-3); }
+
+/* ---- Footer with sticky CTA ------------------------------- */
+.sheet__footer {
+  padding: 12px var(--tb-gutter) max(16px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--divider);
+  background: var(--surface-1);
+}
+
+/* Hero teaser visible behind the sheet (Add screen only) */
+.add-bg-hero {
+  padding: 16px var(--tb-gutter) 24px;
+}
+.add-bg-hero__label {
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+  margin-bottom: 4px;
+}
+.add-bg-hero__sum {
+  font-family: var(--tb-font-numbers);
+  font-weight: var(--tb-fw-black);
+  font-size: var(--tb-fs-display);
+  line-height: var(--tb-lh-display);
+  color: var(--text-1);
+  letter-spacing: -1px;
+}
+.add-bg-hero__meta {
+  margin-top: 6px;
+  font-size: var(--tb-fs-body);
+  color: var(--text-2);
+}
+
+/* Add screen body has no fixed tabbar — kill the body bottom pad */
+body.is-sheet-screen { padding-bottom: 0; }

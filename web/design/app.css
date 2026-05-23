@@ -1,0 +1,412 @@
+/* ===========================================================
+   app.css — shared chrome для всех экранов (mobile-first)
+   Зависит от tokens.css
+   ----------------------------------------------------------
+   Архитектура:
+     <body>
+       <div class="screen">      ← max-width 430, mx auto
+         <header class="top-bar">…</header>
+         <!-- content sections -->
+       </div>
+       <nav class="tabbar">…</nav>  ← fixed bottom, viewport-scoped
+     </body>
+   =========================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: auto;
+  min-height: 100%;
+  background: var(--surface-page);
+  color: var(--text-1);
+  font-family: var(--tb-font-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* room for fixed tabbar at bottom (Add Subscription has no tabbar — see add.css) */
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  overflow-x: hidden;
+}
+
+button, input, select, textarea, a { font-family: inherit; }
+a { color: inherit; }
+
+/* ============================================================
+   Mobile screen container
+   ============================================================ */
+.screen {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--surface-page);
+  padding-top: env(safe-area-inset-top, 0);
+  position: relative;
+}
+
+/* ============================================================
+   Top bar — variants:
+     .top-bar (root screens: client switcher on the left, optional toggle right)
+     .top-bar with back + center title + spacer (sub-screens)
+   ============================================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px var(--tb-gutter) 4px;
+  min-height: 56px;
+}
+.top-bar__center {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-bold);
+  color: var(--text-1);
+  letter-spacing: -0.2px;
+}
+/* Invisible spacer to balance the grid when only a left action exists */
+.top-bar__spacer { flex: 0 0 44px; width: 44px; height: 44px; }
+
+.client-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 14px 4px 4px;
+  background: var(--chip-bg);
+  border: 0;
+  border-radius: var(--tb-radius-pill);
+  cursor: pointer;
+  color: var(--text-1);
+  min-height: 44px;             /* tap target */
+  transition: background .15s ease;
+}
+.client-switcher:hover { background: var(--chip-bg-active); }
+.client-switcher__avatar {
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  background: var(--tb-yellow);
+  color: var(--text-on-yellow);
+  display: grid; place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+.client-switcher__name {
+  font-size: var(--tb-fs-body);
+  font-weight: var(--tb-fw-semibold);
+}
+.client-switcher__chev { color: var(--text-3); display: inline-flex; }
+
+/* Icon button — back / theme / generic */
+.icon-button {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;            /* ≥44 tap target */
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text-1);
+  border: 0;
+  display: grid; place-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s ease, transform .25s ease;
+}
+.icon-button:hover { background: var(--chip-bg-active); }
+.icon-button:active { transform: scale(.94); }
+.icon-button svg { width: 22px; height: 22px; }
+
+/* Theme toggle — variant of icon-button */
+.theme-toggle .sun { display: none; }
+.theme-toggle .moon { display: block; }
+[data-theme="light"] .theme-toggle .sun { display: block; }
+[data-theme="light"] .theme-toggle .moon { display: none; }
+
+/* Back button — chevron */
+.back-button svg { width: 24px; height: 24px; }
+
+/* ============================================================
+   Generic section heading
+   ============================================================ */
+.section-title {
+  font-size: var(--tb-fs-h1);
+  line-height: var(--tb-lh-h1);
+  font-weight: var(--tb-fw-black);
+  letter-spacing: -0.4px;
+  padding: 0 var(--tb-gutter);
+  margin: 8px 0 12px;
+  color: var(--text-1);
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: var(--tb-fw-bold);
+  letter-spacing: 0.6px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  padding: 0 var(--tb-gutter);
+  margin: 8px 0 8px;
+}
+
+/* ============================================================
+   Reusable button styles
+   ============================================================ */
+.btn {
+  font-family: inherit;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: var(--tb-fw-semibold);
+  text-decoration: none;
+  line-height: 1;
+  transition: background .15s ease, color .15s ease;
+}
+.btn--lg {
+  height: 56px;
+  border-radius: var(--tb-radius-lg);
+  font-size: var(--tb-fs-bodyL);
+  padding: 0 20px;
+}
+.btn--md {
+  height: 48px;
+  border-radius: var(--tb-radius-md);
+  font-size: var(--tb-fs-body);
+  padding: 0 16px;
+}
+.btn--primary {
+  background: var(--tb-yellow);
+  color: var(--text-on-yellow);
+}
+.btn--primary:hover  { background: var(--tb-yellow-hover); }
+.btn--primary:active { background: var(--tb-yellow-pressed); }
+
+.btn--secondary {
+  background: var(--chip-bg);
+  color: var(--text-1);
+}
+.btn--secondary:hover { background: var(--chip-bg-active); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-link);
+}
+.btn--block { width: 100%; }
+
+/* ============================================================
+   Generic card
+   ============================================================ */
+.card {
+  background: var(--surface-1);
+  border-radius: var(--tb-radius-2xl);
+  padding: 16px;
+  margin: 0 var(--tb-gutter) 12px;
+}
+.card__title {
+  font-size: var(--tb-fs-h2);
+  line-height: var(--tb-lh-h2);
+  font-weight: var(--tb-fw-bold);
+  margin-bottom: 12px;
+  color: var(--text-1);
+  letter-spacing: -0.2px;
+}
+.card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.card__row + .card__row { border-top: 1px solid var(--divider); }
+
+/* ============================================================
+   Status badges — shared across screens
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: var(--tb-fw-bold);
+  line-height: 1;
+  white-space: nowrap;
+}
+.badge--lg {
+  height: 28px;
+  padding: 0 12px;
+  font-size: 13px;
+  border-radius: 999px;
+}
+.badge--trial { background: var(--tb-warning); color: #FFFFFF; letter-spacing: 0.1px; }
+.badge--price { background: var(--bg-warn-pale); color: var(--tb-warning-fg); }
+[data-theme="light"] .badge--price { color: #B25A04; }
+.badge--unused {
+  gap: 6px; padding-left: 6px;
+  background: var(--chip-bg);
+  color: var(--text-2);
+  font-weight: var(--tb-fw-semibold);
+}
+.badge--unused::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--tb-warning-fg);
+}
+.badge--active {
+  gap: 6px; padding-left: 6px;
+  background: var(--bg-positive-pale);
+  color: var(--tb-positive-fg);
+}
+.badge--active::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: var(--tb-positive-fg);
+}
+.badge--info {
+  background: var(--bg-info-pale);
+  color: var(--text-link);
+}
+.badge svg { width: 10px; height: 10px; }
+.badge--lg svg { width: 12px; height: 12px; }
+
+/* ============================================================
+   Category icon — used in lists and on detail screens
+   ============================================================ */
+.cat-icon {
+  border-radius: 999px;
+  display: grid; place-items: center;
+  color: #FFFFFF;
+  flex: 0 0 auto;
+}
+.cat-icon--sm { width: 36px; height: 36px; }
+.cat-icon--sm svg { width: 18px; height: 18px; }
+.cat-icon--md { width: 44px; height: 44px; }
+.cat-icon--md svg { width: 22px; height: 22px; }
+.cat-icon--lg { width: 80px; height: 80px; }
+.cat-icon--lg svg { width: 40px; height: 40px; }
+.cat-icon--cinema   { background: #6F4FE3; }
+.cat-icon--cinema-2 { background: #E54B6B; }
+.cat-icon--music    { background: #E54B6B; }
+.cat-icon--gaming   { background: #428BF9; }
+.cat-icon--cloud    { background: #2BA5F0; }
+.cat-icon--edu      { background: #2EAE57; }
+.cat-icon--alert    { background: var(--tb-warning); color: #FFFFFF; }
+.cat-icon--info     { background: var(--tb-blue); color: #FFFFFF; }
+.cat-icon--summary  { background: var(--tb-yellow); color: var(--text-on-yellow); }
+
+/* ============================================================
+   Tab bar — FIXED to viewport bottom, centered, max-width 430
+   ============================================================ */
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  padding: 8px 12px max(8px, env(safe-area-inset-bottom)) 12px;
+  background: var(--tabbar-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid var(--tabbar-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 50;
+}
+.tab {
+  background: none;
+  border: 0;
+  padding: 8px 0 4px;
+  min-height: 56px;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  color: var(--text-3);
+  font-size: 10px;
+  font-weight: var(--tb-fw-semibold);
+  letter-spacing: 0.1px;
+  text-decoration: none;
+}
+.tab svg { width: 26px; height: 26px; }
+.tab--active { color: var(--text-1); }
+.tab--add { color: var(--text-1); }
+.tab--add svg {
+  background: var(--tb-yellow);
+  color: var(--text-on-yellow);
+  border-radius: 10px;
+  padding: 4px;
+  width: 28px;
+  height: 28px;
+}
+
+/* ============================================================
+   List rows — generic settings-style row
+   ============================================================ */
+.row-list {
+  list-style: none;
+  background: var(--surface-1);
+  border-radius: var(--tb-radius-2xl);
+  margin: 0 var(--tb-gutter) 12px;
+  overflow: hidden;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  position: relative;
+  cursor: pointer;
+  min-height: 56px;
+  transition: background .15s ease;
+}
+.row:hover { background: var(--surface-3); }
+.row + .row::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  border-top: 1px solid var(--divider);
+}
+.row__icon { width: 36px; height: 36px; }
+.row__body { flex: 1 1 auto; min-width: 0; }
+.row__title {
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  color: var(--text-1);
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row__sub {
+  margin-top: 2px;
+  font-size: var(--tb-fs-sm);
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex: 0 0 auto;
+  color: var(--text-3);
+}
+.row__chev { color: var(--text-3); flex: 0 0 auto; }
+
+.row--destructive .row__title,
+.row--destructive .row__icon { color: var(--tb-negative); }
+.row--destructive .row__icon { background: var(--tb-negative-bg); }
+.row--destructive:hover { background: var(--tb-negative-bg); }

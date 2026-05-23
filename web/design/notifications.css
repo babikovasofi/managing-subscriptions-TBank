@@ -1,0 +1,80 @@
+/* ===========================================================
+   notifications.css — экран «Уведомления»
+   =========================================================== */
+
+.notif-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 var(--tb-gutter);
+  margin-bottom: 16px;
+}
+
+.notif {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 12px;
+  padding: 14px;
+  background: var(--surface-1);
+  border-radius: var(--tb-radius-lg);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: background .15s ease;
+  cursor: pointer;
+}
+.notif:hover { background: var(--surface-3); }
+
+/* unread indicator — small blue dot in the right column,
+   stacked below the time so they never overlap */
+.notif__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--tb-blue);
+  flex: 0 0 8px;
+}
+
+.notif__icon { width: 40px; height: 40px; }
+.notif__icon svg { width: 20px; height: 20px; }
+
+.notif__body { min-width: 0; }
+.notif__title {
+  font-size: var(--tb-fs-bodyL);
+  font-weight: var(--tb-fw-semibold);
+  line-height: 22px;
+  color: var(--text-1);
+  letter-spacing: -0.1px;
+}
+.notif__text {
+  margin-top: 2px;
+  font-size: var(--tb-fs-sm);
+  line-height: 18px;
+  color: var(--text-2);
+}
+.notif__text b { color: var(--text-1); font-weight: var(--tb-fw-semibold); }
+
+.notif__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding-top: 4px;
+}
+.notif__time {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: var(--tb-fw-medium);
+  white-space: nowrap;
+}
+
+/* Day group label */
+.day-label {
+  font-size: 13px;
+  font-weight: var(--tb-fw-bold);
+  color: var(--text-2);
+  padding: 12px var(--tb-gutter) 8px;
+  letter-spacing: -0.1px;
+}
