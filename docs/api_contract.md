@@ -37,8 +37,9 @@
   "period_days":         30,
   "first_payment_date":  "2025-06-22",
   "last_payment_date":   "2026-04-22",
-  "next_payment_date":   "2026-05-22",
-  "n_payments":          11,
+  "next_payment_date":          "2026-05-22",
+  "days_until_next_payment":    0,
+  "n_payments":                 11,
   "status":              "price_increased",
   "confidence":          "high",
   "reasons":             ["Цена выросла с 299 ₽ до 398 ₽ (+99 ₽, +33%)"],
@@ -60,6 +61,8 @@
 | `confidence` | `high` · `low` |
 
 `monthly_amount` = `amount × 30.44 / period_days` (вычисляется на бэке).
+
+`days_until_next_payment` = `(next_payment_date − simulation_today).days` (вычисляется на бэке; может быть 0 или отрицательным).
 
 **Флаги user_actions:**
 
@@ -139,20 +142,23 @@
 {
   "simulation_today": "2026-05-22",
   "clients": [
-    {"id": "scripted_01", "label": "scripted_01 — рост цены"},
-    {"id": "scripted_02", "label": "scripted_02 — пробный период"},
-    {"id": "scripted_03", "label": "scripted_03 — заброшенный gaming"},
-    {"id": "scripted_04", "label": "scripted_04 — много подписок"},
-    {"id": "scripted_05", "label": "scripted_05 — новичок"},
-    {"id": "scripted_06", "label": "scripted_06 — пересекающиеся даты"},
-    {"id": "scripted_07", "label": "scripted_07 — бывший пользователь"},
-    {"id": "scripted_08", "label": "scripted_08 — дублирующиеся сервисы"},
-    {"id": "scripted_09", "label": "scripted_09 — ложный триггер"},
-    {"id": "scripted_10", "label": "scripted_10 — семейный план"},
-    {"id": "client_0001", "label": "client_0001"},
-    {"id": "client_0002", "label": "client_0002"}
+    {"id": "scripted_01", "label": "scripted_01 — рост цены",           "display_name": "Анна Петрова"},
+    {"id": "scripted_02", "label": "scripted_02 — пробный период",      "display_name": "Дмитрий Соколов"},
+    {"id": "scripted_03", "label": "scripted_03 — заброшенный gaming",  "display_name": "Максим Орлов"},
+    {"id": "scripted_04", "label": "scripted_04 — много подписок",      "display_name": "Екатерина Волкова"},
+    {"id": "scripted_05", "label": "scripted_05 — новичок",             "display_name": "Артём Новиков"},
+    {"id": "scripted_06", "label": "scripted_06 — пересекающиеся даты", "display_name": "Ольга Кузнецова"},
+    {"id": "scripted_07", "label": "scripted_07 — бывший пользователь", "display_name": "Илья Морозов"},
+    {"id": "scripted_08", "label": "scripted_08 — дублирующиеся сервисы","display_name": "Полина Лебедева"},
+    {"id": "scripted_09", "label": "scripted_09 — ложный триггер",      "display_name": "Кирилл Зайцев"},
+    {"id": "scripted_10", "label": "scripted_10 — семейный план",       "display_name": "София Соловьёва"},
+    {"id": "client_0001", "label": "client_0001",                       "display_name": "<faker ru_RU>"},
+    {"id": "client_0002", "label": "client_0002",                       "display_name": "<faker ru_RU>"}
   ]
 }
+```
+
+`display_name` — отображаемое имя для UI. Для `scripted_*` — фиксированные имена. Для `client_*` — детерминировано через `Faker('ru_RU').seed_instance(hash(client_id) % 2**32)`.
 ```
 
 ---
@@ -188,9 +194,11 @@
 **Ответ:**
 ```json
 {
-  "client_id":         "scripted_04",
-  "monthly_total":     10763.0,
-  "potential_savings": 769.0,
+  "client_id":          "scripted_04",
+  "monthly_total":      10763.0,
+  "monthly_delta_rub":  -199.0,
+  "monthly_delta_text": "-199 ₽ за месяц",
+  "potential_savings":  769.0,
   "top_3": [
     {
       "merchant_name":  "Skillbox",
@@ -230,6 +238,10 @@
 ```
 
 `top_3` и `potential_savings` учитывают только видимые (не hidden, не false_positive) подписки.
+
+`monthly_delta_rub` = `monthly_total` (текущий) − сумма фактических платежей из `price_history` за предыдущий календарный месяц. `null` если данных за прошлый месяц нет или |delta| < 1 ₽.
+
+`monthly_delta_text` — строка для UI: `"+N ₽ за месяц"` / `"-N ₽ за месяц"` / `null`.
 
 ---
 

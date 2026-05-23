@@ -8,6 +8,7 @@ Run:
 import json
 from datetime import date, timedelta
 
+from faker import Faker as _Faker
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -56,6 +57,28 @@ _SCRIPTED_LABELS: dict[str, str] = {
     "scripted_10": "scripted_10 — семейный план",
 }
 
+_SCRIPTED_DISPLAY_NAMES: dict[str, str] = {
+    "scripted_01": "Анна Петрова",
+    "scripted_02": "Дмитрий Соколов",
+    "scripted_03": "Максим Орлов",
+    "scripted_04": "Екатерина Волкова",
+    "scripted_05": "Артём Новиков",
+    "scripted_06": "Ольга Кузнецова",
+    "scripted_07": "Илья Морозов",
+    "scripted_08": "Полина Лебедева",
+    "scripted_09": "Кирилл Зайцев",
+    "scripted_10": "София Соловьёва",
+}
+
+# One shared Faker instance; seed_instance() makes each call deterministic
+_faker_ru = _Faker("ru_RU")
+
+# Month names in dative case for delta text (index = month number 1–12)
+_MONTH_DATIVE: list[str] = [
+    "", "январю", "февралю", "марту", "апрелю", "маю", "июню",
+    "июлю", "августу", "сентябрю", "октябрю", "ноябрю", "декабрю",
+]
+
 _VALID_ACTIONS = {
     "mark_important", "unmark_important",
     "mute_notifications", "unmute_notifications",
@@ -78,6 +101,52 @@ _VALID_CATEGORIES = {
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
+
+def _get_display_name(client_id: str) -> str:
+    """Return a human-readable Russian name for a client."""
+    if client_id in _SCRIPTED_DISPLAY_NAMES:
+        return _SCRIPTED_DISPLAY_NAMES[client_id]
+    # For client_NNNN: deterministic name via seed derived from the id string
+    _faker_ru.seed_instance(hash(client_id) % 2**32)
+    return _faker_ru.name()
+
+
+def _compute_monthly_delta(
+    visible_subs: list[SubModel],
+    monthly_total: float,
+    today: date,
+) -> tuple[float | None, str | None]:
+    """
+    Compare current monthly_total against actual payments in the previous calendar month.
+
+    current  = monthly_total (normalised, represents what is paid right now)
+    previous = sum of price_history entries whose date falls in the prior month
+
+    Returns (None, None) when there are no prior-month payments (new client / no history).
+    Returns (None, None) when |delta| < 1 ₽ (no meaningful change).
+    """
+    prev_year  = today.year if today.month > 1 else today.year - 1
+    prev_month = today.month - 1 if today.month > 1 else 12
+
+    prev_total = 0.0
+    for sub in visible_subs:
+        for pay_date, pay_amount in sub.price_history:
+            if pay_date.year == prev_year and pay_date.month == prev_month:
+                prev_total += pay_amount
+
+    if prev_total < 0.01:
+        return None, None
+
+    delta = monthly_total - prev_total
+    if abs(delta) < 1.0:
+        return None, None
+
+    delta_rub = round(delta, 2)
+    delta_int = round(delta)
+    if delta > 0:
+        return delta_rub, f"+{delta_int} ₽ за месяц"
+    return delta_rub, f"{delta_int} ₽ за месяц"
+
 
 def _include_client(client_id: str) -> bool:
     if client_id.startswith("scripted_"):
@@ -109,7 +178,9 @@ def _derive_flags(action_types: set[str]) -> dict[str, bool]:
 def _cache_row_to_response(
     row: SubscriptionCache,
     flags: dict[str, bool],
+    today: date,
 ) -> SubscriptionResponse:
+    days_until = (date.fromisoformat(row.next_payment_date) - today).days
     return SubscriptionResponse(
         client_id=row.client_id,
         merchant_name=row.merchant_name,
@@ -121,6 +192,7 @@ def _cache_row_to_response(
         first_payment_date=row.first_payment_date,
         last_payment_date=row.last_payment_date,
         next_payment_date=row.next_payment_date,
+        days_until_next_payment=days_until,
         n_payments=row.n_payments,
         status=row.status,
         confidence=row.confidence,
@@ -150,6 +222,7 @@ def _manual_row_to_response(
         first_payment_date=today_str,
         last_payment_date=today_str,
         next_payment_date=next_date.isoformat(),
+        days_until_next_payment=row.period_days,
         n_payments=1,
         status="active",
         confidence="high",
@@ -259,7 +332,11 @@ def get_clients(db: Session = Depends(get_db)):
     random_clients = sorted(c for c in all_ids if c.startswith("client_"))
 
     clients = [
-        ClientInfo(id=cid, label=_SCRIPTED_LABELS.get(cid, cid))
+        ClientInfo(
+            id=cid,
+            label=_SCRIPTED_LABELS.get(cid, cid),
+            display_name=_get_display_name(cid),
+        )
         for cid in scripted + random_clients
     ]
     today = get_simulation_today().date()
@@ -284,7 +361,7 @@ def get_subscriptions(
         flags = _derive_flags(all_flags.get(row.merchant_name, set()))
         if not include_hidden and (flags["is_hidden"] or flags["is_false_positive"]):
             continue
-        subs.append(_cache_row_to_response(row, flags))
+        subs.append(_cache_row_to_response(row, flags, today))
 
     for row in db.query(ManualSubscription).filter(
         ManualSubscription.client_id == client_id
@@ -306,10 +383,13 @@ def get_analytics(client_id: str, db: Session = Depends(get_db)):
 
     visible = _visible_submodels(db, client_id, today, all_flags)
     analytics = compute_analytics(client_id, visible)
+    delta_rub, delta_text = _compute_monthly_delta(visible, analytics.monthly_total, today)
 
     return AnalyticsResponse(
         client_id=client_id,
         monthly_total=round(analytics.monthly_total, 2),
+        monthly_delta_rub=delta_rub,
+        monthly_delta_text=delta_text,
         potential_savings=round(analytics.potential_savings, 2),
         top_3=[
             TopSubscription(

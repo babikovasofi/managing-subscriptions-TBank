@@ -17,6 +17,7 @@ class SubscriptionResponse(BaseModel):
     first_payment_date: str
     last_payment_date: str
     next_payment_date: str
+    days_until_next_payment: int
     n_payments: int
     status: str
     confidence: str
@@ -54,6 +55,7 @@ class Recommendation(BaseModel):
 class ClientInfo(BaseModel):
     id: str
     label: str
+    display_name: str
 
 
 class ClientListResponse(BaseModel):
@@ -69,6 +71,8 @@ class SubscriptionsListResponse(BaseModel):
 class AnalyticsResponse(BaseModel):
     client_id: str
     monthly_total: float
+    monthly_delta_rub: float | None = None
+    monthly_delta_text: str | None = None
     potential_savings: float
     top_3: list[TopSubscription]
     recommendations: list[Recommendation]
