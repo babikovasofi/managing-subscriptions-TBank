@@ -32,6 +32,13 @@ function NotifIcon({ type }: { type: NotificationType }) {
           <line x1="12" y1="1" x2="12" y2="4"/>
         </svg>
       )}
+      {type === "possibly_unused" && (
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="9" cy="9" r="7"/>
+          <line x1="9" y1="5" x2="9" y2="9"/>
+          <circle cx="9" cy="12.5" r="0.5" fill="currentColor"/>
+        </svg>
+      )}
       {type === "summary" && (
         <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="3" y1="13" x2="15" y2="13"/>
@@ -45,10 +52,11 @@ function NotifIcon({ type }: { type: NotificationType }) {
 }
 
 const NOTIF_TITLE: Record<NotificationType, string> = {
-  price_increased: "Цена выросла",
-  trial_ending:    "Пробный заканчивается",
-  upcoming_payment:"Скоро списание",
-  summary:         "Сводка",
+  price_increased:  "Цена выросла",
+  trial_ending:     "Пробный заканчивается",
+  upcoming_payment: "Скоро списание",
+  possibly_unused:  "Возможно, не нужна",
+  summary:          "Сводка",
 };
 
 export default function NotificationsPage() {

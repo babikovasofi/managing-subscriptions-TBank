@@ -269,9 +269,8 @@ def scenario_heavy_user(
         ("VK Combo",                  4),   # next_payment ≈ day 4
         ("Битрикс24 Базовый",         5),   # next_payment ≈ day 5
         ("GFN.RU",                   30),
-        ("Кинопоиск HD",             40),
         ("Яндекс.Плюс",              50),
-        ("МегаФон Облако",           60),   # next_payment ≈ day 0
+        ("МегаФон Облако",           60),
         ("Литрес Букмейт",           70),
     ]
     plans = []
@@ -286,6 +285,20 @@ def scenario_heavy_user(
             price_history=[(start, float(merchant["base_price_rub"]))],
             scenario_tag="regular",
         ))
+
+    # Кинопоиск HD — цена выросла с 299₽ до 399₽ (~5 месяцев назад)
+    kinopoisk = _get_sub(subs_ref, "Кинопоиск HD")
+    kino_start = SIMULATION_TODAY - timedelta(days=260)   # offset≈40
+    kino_price_change = kino_start + timedelta(days=150)  # ~5 мес после старта
+    plans.append(_make_plan(
+        client_id=client_id,
+        merchant=kinopoisk,
+        start_date=kino_start,
+        end_date=None,
+        price_history=[(kino_start, 299.0), (kino_price_change, 399.0)],
+        scenario_tag="price_increase",
+    ))
+
     return ScriptedClientResult(
         client_id=client_id,
         persona=persona,

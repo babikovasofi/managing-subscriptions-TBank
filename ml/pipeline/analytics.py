@@ -146,6 +146,15 @@ def compute_analytics(client_id: str, subscriptions: list[Subscription]) -> Clie
                 merchant_name=s.merchant_name,
             ))
 
+    for s in subs:
+        if s.status == "possibly_unused" and s.confidence == "high":
+            notifications.append(Notification(
+                date=today,
+                text=f"Вы давно не пользуетесь «{s.merchant_name}». Подписка стоит {_monthly_amount(s):.0f} ₽/мес.",
+                type="possibly_unused",
+                merchant_name=s.merchant_name,
+            ))
+
     # Summary — always last
     if subs:
         notifications.append(Notification(

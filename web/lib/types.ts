@@ -23,6 +23,7 @@ export type NotificationType =
   | "upcoming_payment"
   | "trial_ending"
   | "price_increased"
+  | "possibly_unused"
   | "summary";
 
 export type ActionType =
