@@ -375,10 +375,10 @@ README с описанием проекта, ссылкой на демо, ск�
 - [x] `docs/api_contract.md`
 
 ### Этап 9. API
-- [ ] FastAPI каркас
-- [ ] SQLAlchemy модели
-- [ ] `init_db.py` (прогон ML и кэш)
-- [ ] Эндпоинты: clients, subscriptions, analytics, notifications, actions, manual
+- [x] FastAPI каркас
+- [x] SQLAlchemy модели
+- [x] `init_db.py` (прогон ML и кэш)
+- [x] Эндпоинты: clients, subscriptions, analytics, notifications, actions, manual
 
 ### Этап 10. Фронт каркас
 - [ ] Next.js init
@@ -461,11 +461,17 @@ git push
 # === Запуск компонентов ===
 
 # Генерация датасета
-# python data/generator/generate.py
+python data/generator/generate.py
+
+# Обучение модели (после генерации)
+python -m ml.models.train
+
+# Инициализация БД (один раз, после обучения)
+python -m api.init_db
 
 # Запуск API
-# uvicorn api.app.main:app --reload
+uvicorn api.app.main:app --reload --port 8000
 
 # Запуск фронта
-# cd web && npm run dev
+cd web && npm run dev
 ```
