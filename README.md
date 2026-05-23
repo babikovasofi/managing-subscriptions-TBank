@@ -8,6 +8,8 @@ MVP мобильного сервиса, который автоматическ
 
 **[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-f97f.up.railway.app)**
 
+API: [https://managing-subscriptions-tbank-production.up.railway.app](https://managing-subscriptions-tbank-production.up.railway.app)
+
 Оптимизировано под мобильный viewport (375–430px) — открывайте с телефона или DevTools Mobile.
 
 Для демо выберите одного из 10 режиссированных клиентов через переключатель в шапке:
@@ -79,4 +81,11 @@ npm run dev
 
 ## Команда
 
-Два человека — [впишите имена сами]
+София Бабикова, Иван Рябченко
+
+---
+
+## Как запустить задеплоенный сайт
+
+Открой в браузере (оптимизировано под мобильный):
+**[https://luminous-manifestation-production-f97f.up.railway.app](https://luminous-manifestation-production-f97f.up.railway.app)**
