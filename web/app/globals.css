@@ -244,8 +244,6 @@ html, body {
 body {
   min-height: 100vh;
   min-height: 100dvh;
-  /* room for fixed tabbar at bottom (Add Subscription has no tabbar — see add.css) */
-  padding-bottom: calc(76px + env(safe-area-inset-bottom));
   overflow-x: hidden;
 }
 
@@ -261,6 +259,8 @@ a { color: inherit; }
   margin: 0 auto;
   background: var(--surface-page);
   padding-top: env(safe-area-inset-top, 0);
+  /* keep content above the fixed tab bar */
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
   position: relative;
 }
 
@@ -1549,5 +1549,5 @@ a { color: inherit; }
   color: var(--text-2);
 }
 
-/* Add screen body has no fixed tabbar — kill the body bottom pad */
-body.is-sheet-screen { padding-bottom: 0; }
+/* Add screen has no fixed tabbar — remove extra bottom padding from .screen */
+body.is-sheet-screen .screen { padding-bottom: env(safe-area-inset-bottom, 0); }

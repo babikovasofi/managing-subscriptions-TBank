@@ -9,10 +9,21 @@ import { daysUntil, notifGroupLabel } from "@/lib/utils";
 
 const GROUP_ORDER = ["Сегодня", "Вчера", "Ранее"] as const;
 
+const NOTIF_COLORS: Record<NotificationType, { bg: string; color: string }> = {
+  upcoming_payment: { bg: "#FFDD2D", color: "#333333" },
+  price_increased:  { bg: "#EF8007", color: "#ffffff" },
+  possibly_unused:  { bg: "#6366F1", color: "#ffffff" },
+  trial_ending:     { bg: "#F59E0B", color: "#ffffff" },
+  summary:          { bg: "#3B82F6", color: "#ffffff" },
+};
+
 function NotifIcon({ type }: { type: NotificationType }) {
-  const iconClass = type === "summary" ? "cat-icon--summary" : "cat-icon--alert";
+  const { bg, color } = NOTIF_COLORS[type] ?? { bg: "#9CA3AF", color: "#ffffff" };
   return (
-    <div className={`cat-icon cat-icon--sm ${iconClass}`}>
+    <div
+      className="cat-icon cat-icon--sm"
+      style={{ background: bg, color }}
+    >
       {type === "price_increased" && (
         <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 14V4M5 8l4-4 4 4"/>
