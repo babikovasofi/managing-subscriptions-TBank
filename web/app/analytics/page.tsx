@@ -120,14 +120,29 @@ export default function AnalyticsPage() {
         <div className="donut-card">
           <div className="donut" style={{ background: conicGradient }}>
             <div className="donut__center">
-              <div className="donut__center-value">{subscriptions.length}</div>
+              <div
+                className="donut__center-value"
+                style={{ fontSize: "48px", fontWeight: "800", lineHeight: 1 }}
+              >
+                {subscriptions.length}
+              </div>
               <div className="donut__center-label">подписок</div>
             </div>
           </div>
           <div className="legend">
             {catEntries.slice(0, 5).map(([cat, amt]) => (
               <div key={cat} className="legend__item">
-                <span className="legend__swatch" style={{ background: CAT_COLORS[cat] }} />
+                <span
+                  className="legend__swatch"
+                  style={{
+                    background: CAT_COLORS[cat],
+                    display: "inline-block",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "3px",
+                    flexShrink: 0,
+                  }}
+                />
                 <span className="legend__label">{CAT_LABELS[cat]}</span>
                 <span className="legend__value">{formatRub(amt)}</span>
               </div>

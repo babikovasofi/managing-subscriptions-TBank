@@ -287,11 +287,16 @@ export default function SubscriptionDetailPage() {
                 {sub.is_important ? "Убрать метку важной подписки" : "Всегда показывать вверху"}
               </div>
             </div>
-            <div className="action__chev">
-              <svg width="7" height="12" viewBox="0 0 7 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 1l5 5-5 5"/>
-              </svg>
-            </div>
+            <label className="toggle" onClick={(e) => e.stopPropagation()}>
+              <input
+                type="checkbox"
+                checked={sub.is_important}
+                onChange={() => handleAction(sub.is_important ? "unmark_important" : "mark_important")}
+              />
+              <div className="toggle__track">
+                <div className="toggle__thumb" />
+              </div>
+            </label>
           </button>
         </li>
         <li>
