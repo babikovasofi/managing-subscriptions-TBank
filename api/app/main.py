@@ -33,9 +33,6 @@ from ml.pipeline.analytics import DAYS_PER_MONTH, compute_analytics
 from ml.pipeline.schema import Subscription as SubModel
 from ml.pipeline.time_utils import get_simulation_today
 
-from api.startup import run_startup
-run_startup()
-
 app = FastAPI(title="Subscription Manager API", version="1.0")
 
 app.add_middleware(
