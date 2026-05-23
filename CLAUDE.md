@@ -132,15 +132,15 @@ CLAUDE.md          — этот файл, для агента
 
 Используем фиксированный набор:
 
-- `streaming_video` (Кинопоиск, ivi, Okko, START)
+- `streaming_video` (Кинопоиск HD, ivi, Okko, START, Wink, Яндекс.Плюс)
 - `streaming_music` (Яндекс.Музыка, VK Музыка, Звук)
-- `cloud_storage` (iCloud, Яндекс 360, Google One, Mail.ru Cloud)
-- `education` (Skillbox, Skyeng, Duolingo, Stepik, GeekBrains)
-- `gaming` (PS Plus, Xbox Game Pass, Steam, VK Play)
-- `food_delivery` (Яндекс.Плюс с доставкой, Самокат подписка, СберПрайм)
-- `productivity` (Notion, GitHub Copilot, ChatGPT Plus, Telegram Premium)
-- `reading` (Литрес, Bookmate, MyBook)
-- `other` — всё что не попадает в категории выше
+- `cloud_storage` (Яндекс 360, Облако Mail.ru, МегаФон Облако)
+- `education` (Skillbox, Skyeng, Stepik Pro, GeekBrains)
+- `gaming` (VK Play Cloud, GFN.RU, Яндекс.Игры)
+- `food_delivery` (СберПрайм, Самокат Подписка)
+- `productivity` (Telegram Premium, VK Combo, Битрикс24 Базовый)
+- `reading` (Литрес Букмейт, МТС Строки, MyBook)
+- `other` — всё что не попадает в категории выше (Boosty, Kaspersky Plus, Dr.Web)
 
 ---
 
@@ -338,6 +338,7 @@ README с описанием проекта, ссылкой на демо, ск�
 ### Этап 1. Справочники
 - [x] `data/references/subscriptions.json` (≥30 сервисов)
 - [x] `data/references/regular_merchants.json` (≥30 мерчантов)
+- [x] Замена иностранных сервисов на российские (9 замен + 3 удалено, 30 сервисов итого)
 
 ### Этап 2. Генератор датасета
 - [x] Конфиг генератора (seed, число клиентов, период, simulation_today)
