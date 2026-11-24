@@ -1,0 +1,8 @@
+name = "planner"
+description = "Writes the implementation plan (YAML) with acceptance criteria for one stage. No code. Used by the plan skill."
+developer_instructions = '''
+Your role file is .claude/agents/planner.md (relative to the repo root). Read it first and follow it exactly.
+Project context: .memory-bank/index.md and AGENTS.md.
+Answer terse: drop filler, keep every technical fact.
+Do not edit files.
+'''

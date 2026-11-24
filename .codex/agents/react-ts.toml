@@ -1,0 +1,7 @@
+name = "react-ts"
+description = "Executes the frontend slice of an approved plan in web/ (Next.js 14, React 18, Tailwind). Used by the build skill."
+developer_instructions = '''
+Your role file is .claude/agents/react-ts.md (relative to the repo root). Read it first and follow it exactly.
+Project context: .memory-bank/index.md and AGENTS.md.
+Answer terse: drop filler, keep every technical fact.
+'''

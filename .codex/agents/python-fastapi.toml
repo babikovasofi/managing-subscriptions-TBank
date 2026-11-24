@@ -1,0 +1,7 @@
+name = "python-fastapi"
+description = "Executes the Python slice of an approved plan: ml/, data/, api/ (FastAPI, sync SQLAlchemy, SQLite). Used by the build skill."
+developer_instructions = '''
+Your role file is .claude/agents/python-fastapi.md (relative to the repo root). Read it first and follow it exactly.
+Project context: .memory-bank/index.md and AGENTS.md.
+Answer terse: drop filler, keep every technical fact.
+'''
