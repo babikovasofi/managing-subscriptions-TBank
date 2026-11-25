@@ -1,0 +1,7 @@
+name = "devops"
+description = "Executes the infra slice of an approved plan: Dockerfile, docker-compose, Caddy, Yandex Cloud VM deploy. Used by the build skill."
+developer_instructions = '''
+Your role file is .claude/agents/devops.md (relative to the repo root). Read it first and follow it exactly.
+Project context: .memory-bank/index.md and AGENTS.md.
+Answer terse: drop filler, keep every technical fact.
+'''

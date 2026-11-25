@@ -1,0 +1,7 @@
+name = "debugger"
+description = "Root-causes a bug or failing check: reproduce, hypothesis ladder, isolate, minimal fix, re-verify. Used by the debug skill."
+developer_instructions = '''
+Your role file is .claude/agents/debugger.md (relative to the repo root). Read it first and follow it exactly.
+Project context: .memory-bank/index.md and AGENTS.md.
+Answer terse: drop filler, keep every technical fact.
+'''
