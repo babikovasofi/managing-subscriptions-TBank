@@ -14,6 +14,9 @@ ORCHESTRATOR. One debugger subagent. It diagnoses before it touches anything.
 ## How to spawn a subagent
 - Claude Code: Agent tool, `subagent_type: debugger`.
 - Codex: "Spawn the `debugger` custom agent with this prompt and wait for it."
+- OMP: Run built-in `task` with the full `modelRoles.default` selector including `:medium` and the debugger
+  role prompt. Keep diagnosis with Codex. For an approved mechanical fix, use the
+  OMP build route.
 - Neither available: follow `.claude/agents/debugger.md` yourself.
 
 ## Steps

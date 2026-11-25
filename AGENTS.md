@@ -69,16 +69,21 @@
 
 ### Харнесс
 
-Облегчённый [labs-harness](https://github.com/ayusavin/labs-harness) (MIT, `.claude/HARNESS_LICENSE`): только цикл plan → build → review → debug. Одни и те же роли и скиллы для Claude Code и Codex.
+Облегчённый [labs-harness](https://github.com/ayusavin/labs-harness) (MIT, `.claude/HARNESS_LICENSE`): только цикл plan → build → review → debug. Общие роли и скиллы для Claude Code, Codex и Oh My Pi (OMP).
+Запуск и маршрутизация OMP описаны в [docs/omp.md](docs/omp.md).
 
 | Что | Где | Claude Code | Codex |
 |---|---|---|---|
 | Скиллы (канон) | `.agents/skills/{plan,build,review,debug}/SKILL.md` | через обёртки `.claude/skills/*` → `/plan`, `/build`, `/review`, `/debug` | читает сам → `$plan`, `$build`, `$review`, `$debug` |
 | Роли (канон) | `.claude/agents/*.md` | сабагенты напрямую | через обёртки `.codex/agents/*.toml` |
 | Контекст для ролей | `.memory-bank/index.md` (ссылки на TZ, AGENTS, контракт, history) | | |
-| Отчёты | `swarm-report/<slug>-{plan,build,review}.md` — общие для обоих | | |
+| Отчёты | `swarm-report/<slug>-{plan,build,review}.md` — общие для всех трёх | | |
 
-Правим только канон; обёртки лишь ссылаются на него.
+Правим канон; обёртки ссылаются на него.
+
+- **Standalone Codex:** GPT выполняет все этапы сам или через штатных сабагентов Codex.
+- **Claude Code:** Claude выполняет все этапы сам или через штатных сабагентов Claude Code.
+- **OMP:** GPT-6.2 Sol с `medium` ведёт сессию, делает план и диагностику, реализует сложные части и проверяет результат через отдельного ревьюера Codex. DeepSeek получает только механические поручения через встроенного `sonic`. Для каждого вызова, включая повторный, Codex пишет самодостаточную инструкцию по шаблону DeepSeek handoff в [скилле build](.agents/skills/build/SKILL.md): точные пути, пошаговые действия, образец, критерии сдачи и формат отчёта. Если осталось решение, которое исполнитель должен принять сам, задачу берёт Codex. Codex проверяет патч и запускает проверки. Группируй однотипные изменения с общим правилом. При ошибке маршрутизации останови делегирование и сообщи причину. Общие скиллы остаются в `.agents/skills`.
 
 **Роли.** Консилиум (код не пишут): `planner`, `skeptic`, `reviewer`, `debugger`. Исполнители по зонам файлов:
 

@@ -1,0 +1,19 @@
+modelRoles:
+  default: openai-codex/gpt-6.2-sol:medium
+  plan: openai-codex/gpt-6.2-sol:medium
+  task: openai-codex/gpt-6.2-sol:medium
+  mechanical: deepseek/deepseek-flash
+
+skills:
+  enableClaudeProject: false
+  enableAgentsProject: true
+
+task:
+  perCallModel: "on"
+  perCallModelAllow:
+    - openai-codex/gpt-6.2-sol
+    - deepseek/deepseek-flash
+  isolation:
+    enabled: true
+    merge: patch
+    apply: false

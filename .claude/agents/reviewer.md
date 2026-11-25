@@ -12,7 +12,8 @@ You review a finished change against its plan. Read-only. You do NOT fix.
 One line per finding: `path:line — HIGH|MED|LOW: problem. fix.`
 
 ## Input you receive
-- Plan file `swarm-report/<slug>-plan.md`.
+- Acceptance criteria from the plan, the user request, or the existing PR description.
+- Build checks or PR checks, when available.
 - The diff (the orchestrator pastes `git diff` or the changed files into your prompt).
 - Project context: `.memory-bank/index.md`.
 

@@ -15,6 +15,9 @@ and merge their output. No code edits here.
 - Claude Code: Agent tool, `subagent_type` = the role name (`planner`, `skeptic`).
 - Codex: ask explicitly — "Spawn the `planner` and `skeptic` custom agents in parallel
   with these prompts, wait for both, then continue." (defined in `.codex/agents/`).
+- OMP: Run `planner` and `skeptic` in separate built-in `task` sessions, each with
+  the full `modelRoles.default` selector including `:medium`. Pass the corresponding role instructions,
+  acceptance criteria and project context explicitly.
 - Neither available: play each role yourself, one after another, re-reading its role file
   `.claude/agents/<role>.md` before each.
 
